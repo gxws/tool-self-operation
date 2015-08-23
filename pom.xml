@@ -8,6 +8,7 @@
 	<modules>
 		<module>tool-common</module>
 		<module>tool-link-properties</module>
+		<module>tool-logging</module>
 	</modules>
 
 	<build>
