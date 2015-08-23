@@ -10,6 +10,7 @@
 		<module>tool-link-properties</module>
 		<module>tool-logging</module>
 		<module>tool-web-tv</module>
+		<module>tool-validator</module>
 	</modules>
 
 	<build>
