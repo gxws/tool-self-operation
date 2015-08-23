@@ -28,6 +28,10 @@ mail list:朱伟亮 \<zhuwl120820@gxwsxx.com>
 ### 1.2.0
 添加WebLoggingInterceptor拦截器拦截到异常后的log。<br>
 
+### 2.0.0
+去除dubbo的拦截器。<br>
+去除dubbo依赖。<br>
+
 功能点
 ---
 ### 1.收集，收集信息包括：
