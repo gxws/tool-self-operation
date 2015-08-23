@@ -11,6 +11,7 @@
 		<module>tool-logging</module>
 		<module>tool-web-tv</module>
 		<module>tool-validator</module>
+		<module>tool-test</module>
 	</modules>
 
 	<build>
