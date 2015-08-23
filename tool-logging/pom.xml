@@ -4,61 +4,38 @@
 	<parent>
 		<groupId>com.gxws</groupId>
 		<artifactId>tool-self-operation</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
 	<artifactId>tool-logging</artifactId>
-	<properties>
-		<version.tool.common>1.2.0-RELEASE</version.tool.common>
-
-		<version.slf4j>1.7.12</version.slf4j>
-		<version.log4j>2.3</version.log4j>
-
-		<version.dubbo>2.4.10</version.dubbo>
-		<version.fastjson>1.2.6</version.fastjson>
-
-		<version.springframework>4.1.6.RELEASE</version.springframework>
-		<version.aspectjweaver>1.8.2</version.aspectjweaver>
-
-		<version.servlet>3.1.0</version.servlet>
-
-		<version.mongo.java.driver>2.13.0</version.mongo.java.driver>
-		<version.spring.data.mongodb>1.6.2.RELEASE</version.spring.data.mongodb>
-	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.gxws</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>tool-common</artifactId>
-			<version>${version.tool.common}</version>
 		</dependency>
-		<!-- log4j2 -->
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${version.log4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-web</artifactId>
-			<version>${version.log4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-1.2-api</artifactId>
-			<version>${version.log4j}</version>
 		</dependency>
 
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${version.springframework}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>${version.aspectjweaver}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -66,36 +43,28 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>${version.fastjson}</version>
 		</dependency>
 
 		<!-- dubbo -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
-			<version>${version.dubbo}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>${version.servlet}</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- mongodb -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
-			<version>${version.mongo.java.driver}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>${version.spring.data.mongodb}</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

@@ -4,70 +4,36 @@
 	<parent>
 		<groupId>com.gxws</groupId>
 		<artifactId>tool-self-operation</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
 	<artifactId>tool-mybatis</artifactId>
 
-	<properties>
-		<version.tool.common>1.1.0-RELEASE</version.tool.common>
-
-		<version.mybatis>3.3.0</version.mybatis>
-
-		<version.slf4j>1.7.12</version.slf4j>
-
-		<version.aspectjweaver>1.8.2</version.aspectjweaver>
-
-		<!-- test scope -->
-		<version.mariadb.java.client>1.1.9</version.mariadb.java.client>
-		<version.log4j>1.2.17</version.log4j>
-		<version.testng>6.8.21</version.testng>
-	</properties>
-
 	<dependencies>
 		<dependency>
-			<groupId>com.gxws</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>tool-common</artifactId>
-			<version>${version.tool.common}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>${version.mybatis}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${version.slf4j}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${version.slf4j}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>${version.aspectjweaver}</version>
 		</dependency>
 		<!-- test scope -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
-			<version>${version.mariadb.java.client}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>${version.testng}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>apache-log4j-extras</artifactId>
-			<version>${version.log4j}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

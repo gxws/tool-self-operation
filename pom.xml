@@ -15,6 +15,198 @@
 		<module>tool-mybatis</module>
 	</modules>
 
+	<description>tool kit for the java development team which names "Self Operation"</description>
+	<developers>
+		<developer>
+			<email>zhuwl120820@gxwsxx.com</email>
+			<name>zhu wei liang</name>
+		</developer>
+	</developers>
+
+	<properties>
+
+		<!-- spring -->
+		<version.springframework>4.1.7.RELEASE</version.springframework>
+		<version.aspectjweaver>1.8.2</version.aspectjweaver>
+
+		<!-- servlet -->
+		<version.servlet>3.1.0</version.servlet>
+		<version.servlet.jstl>1.2</version.servlet.jstl>
+
+		<!-- logging -->
+		<version.slf4j>1.7.12</version.slf4j>
+		<version.log4j>2.3</version.log4j>
+
+		<!-- zookeeper -->
+		<version.zookeeper.curator>2.7.1</version.zookeeper.curator>
+
+		<!-- test -->
+		<version.testng>6.9.6</version.testng>
+
+		<!-- rpc -->
+		<version.dubbo>2.4.10</version.dubbo>
+
+		<!-- json -->
+		<version.fastjson>1.2.6</version.fastjson>
+
+		<!-- mysql db -->
+		<version.mybatis>3.3.0</version.mybatis>
+		<version.mariadb.java.client>1.1.9</version.mariadb.java.client>
+
+		<!-- mongodb -->
+		<version.mongo.java.driver>2.13.0</version.mongo.java.driver>
+		<version.spring.data.mongodb>1.6.2.RELEASE</version.spring.data.mongodb>
+
+		<!-- validator -->
+		<version.hibernate.validator>5.1.3.Final</version.hibernate.validator>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>tool-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${version.servlet}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${version.servlet.jstl}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- spring -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${version.aspectjweaver}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${version.springframework}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${version.springframework}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${version.springframework}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${version.springframework}</version>
+			</dependency>
+
+
+			<!-- logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.slf4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${version.log4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-web</artifactId>
+				<version>${version.log4j}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-1.2-api</artifactId>
+				<version>${version.log4j}</version>
+			</dependency>
+
+			<!-- zookeeper -->
+			<dependency>
+				<groupId>org.apache.curator</groupId>
+				<artifactId>curator-framework</artifactId>
+				<version>${version.zookeeper.curator}</version>
+			</dependency>
+
+			<!-- test -->
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${version.testng}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- json -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${version.fastjson}</version>
+			</dependency>
+
+			<!-- dubbo -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${version.dubbo}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- mysql db -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${version.mybatis}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mariadb.jdbc</groupId>
+				<artifactId>mariadb-java-client</artifactId>
+				<version>${version.mariadb.java.client}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- mongodb -->
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>${version.mongo.java.driver}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-mongodb</artifactId>
+				<version>${version.spring.data.mongodb}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- validator -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${version.hibernate.validator}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<!-- clean -->
