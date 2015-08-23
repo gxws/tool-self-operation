@@ -12,6 +12,7 @@
 		<module>tool-web-tv</module>
 		<module>tool-validator</module>
 		<module>tool-test</module>
+		<module>tool-mybatis</module>
 	</modules>
 
 	<build>
