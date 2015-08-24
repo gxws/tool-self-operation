@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -27,7 +28,7 @@ import com.gxws.tool.common.constant.ProjectConstant;
  */
 public class ProjectPropertiesCore implements IPropertiesCore {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ProjectPropertiesCore.class);
 
 	private ProjectConstant pc = ProjectConstant.instance();
 
@@ -112,11 +113,7 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	@Override
 	public void servletContextProperties(ServletContext servletContext) {
 		if (null != servletContext) {
-			pc.getAll()
-					.entrySet()
-					.forEach(
-							en -> servletContext.setAttribute(en.getKey(),
-									en.getValue()));
+			pc.getAll().entrySet().forEach(en -> servletContext.setAttribute(en.getKey(), en.getValue()));
 			servletContext.setAttribute("project", pc);
 			servletContext.setAttribute("ctx", pc.getContextPath());
 		}
@@ -131,11 +128,10 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	 */
 	private String ips() {
 		Enumeration<NetworkInterface> netInterfaces;
-		Pattern p = Pattern
-				.compile("^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$");
+		Pattern p = Pattern.compile("^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$");
 		Matcher m = null;
 		String ip = null;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		try {
 			netInterfaces = NetworkInterface.getNetworkInterfaces();
 			while (netInterfaces.hasMoreElements()) {
@@ -149,14 +145,15 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 					}
 				}
 			}
-			if (0 == sb.length()) {
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			log.error("读取不到当前服务器IP", e);
-			return "";
+		} catch (SocketException e) {
+			log.error("读取不到当前服务器IP" + e.getMessage(), e);
+			return sb.toString();
 		}
-		return sb.substring(1);
+		if (0 == sb.length()) {
+			return sb.toString();
+		} else {
+			return sb.substring(1);
+		}
 	}
 
 	/**
@@ -169,8 +166,7 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	private File mavenPropertiesPath() {
 		File f = new File(sc.getRealPath("/") + "META-INF/maven");
 		f = f.listFiles()[0].listFiles()[0];
-		f = f.listFiles((dir, name) -> ("pom.properties".equals(name) ? true
-				: false))[0];
+		f = f.listFiles((dir, name) -> ("pom.properties".equals(name) ? true : false))[0];
 		log.debug("读取项目maven信息的路径 " + f.getAbsolutePath());
 		return f;
 	}

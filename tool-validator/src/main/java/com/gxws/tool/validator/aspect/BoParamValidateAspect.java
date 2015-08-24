@@ -20,7 +20,7 @@ public class BoParamValidateAspect {
 
 	private ResultReflectCore rcore = new ResultReflectCore();
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static Logger log = LoggerFactory.getLogger(BoParamValidateAspect.class);
 
 	/**
 	 * 用于验证参数
@@ -33,7 +33,7 @@ public class BoParamValidateAspect {
 	 *             异常
 	 * @since 1.0
 	 */
-	public Object around(ProceedingJoinPoint pjp) throws Throwable {
+	public Object around(ProceedingJoinPoint pjp) {
 		Object[] os = pjp.getArgs();
 		if (null != os && 0 < os.length) {
 			Object target = pjp.getTarget();
@@ -45,6 +45,11 @@ public class BoParamValidateAspect {
 				return rcore.result(os, methodName, target.getClass(), e);
 			}
 		}
-		return pjp.proceed();
+		try {
+			return pjp.proceed();
+		} catch (Throwable e) {
+			log.error(e.getMessage(), e);
+			return null;
+		}
 	}
 }

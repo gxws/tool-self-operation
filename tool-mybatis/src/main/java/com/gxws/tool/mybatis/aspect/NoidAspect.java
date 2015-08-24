@@ -30,20 +30,17 @@ public class NoidAspect {
 		Method noidSetterMethod = null;
 		try {
 			try {
-				noidSetterMethod = entity.getClass().getMethod("setNoid",
-						String.class);
+				noidSetterMethod = entity.getClass().getMethod("setNoid", String.class);
 			} catch (NoSuchMethodException e1) {
-				log.debug("没有noid属性");
+				log.debug("没有noid属性 " + e1.getLocalizedMessage(), e1);
 				return;
 			}
-			Method noidGetterMethod = mapper.getClass().getMethod("noid",
-					new Class<?>[0]);
+			Method noidGetterMethod = mapper.getClass().getMethod("noid", new Class<?>[0]);
 			Object noidValue = noidGetterMethod.invoke(mapper, new Object[0]);
 			noidSetterMethod.invoke(entity, noidValue);
-		} catch (NoSuchMethodException | SecurityException
-				| IllegalAccessException | IllegalArgumentException
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			log.error("编号值修改错误", e);
+			log.error("编号值修改错误 " + e.getLocalizedMessage(), e);
 		}
 	}
 }

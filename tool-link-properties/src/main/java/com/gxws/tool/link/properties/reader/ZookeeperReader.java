@@ -18,7 +18,7 @@ import com.gxws.tool.link.properties.exception.LinkPropertiesReaderInitException
  */
 public class ZookeeperReader implements RemoteReader {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ZookeeperReader.class);
 
 	public final static String DEFAULT_NAMESPACE = "link.properties";
 

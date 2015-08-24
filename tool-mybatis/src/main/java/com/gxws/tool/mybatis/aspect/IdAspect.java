@@ -42,10 +42,9 @@ public class IdAspect {
 		Method method = null;
 		try {
 			try {
-				method = entity.getClass().getMethod(
-						methodNameGetter.toString());
+				method = entity.getClass().getMethod(methodNameGetter.toString());
 			} catch (NoSuchMethodException e1) {
-				log.debug("没有" + methodNameGetter.toString() + "方法");
+				log.debug("没有 " + methodNameGetter.toString() + " 方法 " + e1.getMessage(), e1);
 				return;
 			}
 			Object o = method.invoke(entity);
@@ -53,15 +52,13 @@ public class IdAspect {
 				return;
 			}
 			try {
-				method = entity.getClass().getMethod(
-						methodNameSetter.toString(), String.class);
+				method = entity.getClass().getMethod(methodNameSetter.toString(), String.class);
 			} catch (NoSuchMethodException e) {
-				log.debug("没有" + methodNameSetter.toString() + "方法");
+				log.debug("没有 " + methodNameSetter.toString() + " 方法 " + e.getLocalizedMessage(), e);
 			}
 			method.invoke(entity, Uuid.order());
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | SecurityException e2) {
-			log.error("操作主键值错误", e2);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e2) {
+			log.error("操作主键值错误" + e2.getLocalizedMessage(), e2);
 		}
 	}
 }

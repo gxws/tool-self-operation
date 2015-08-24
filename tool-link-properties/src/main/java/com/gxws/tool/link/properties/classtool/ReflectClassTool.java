@@ -23,7 +23,7 @@ import com.gxws.tool.link.properties.datamodel.Property;
  *
  */
 public class ReflectClassTool implements ClassTool {
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ReflectClassTool.class);
 
 	/**
 	 * @see com.gxws.tool.link.properties.classtool.ClassTool#forClasses(List)

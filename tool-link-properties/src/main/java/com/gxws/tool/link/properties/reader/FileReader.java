@@ -48,14 +48,12 @@ public class FileReader implements Reader {
 		ProjectConstant pc = ProjectConstant.instance();
 		if (propertyKey == null) {
 			LinkPropertiesKeyException e = new LinkPropertiesKeyException();
-			// e.setMessage(propertyKey + "属性名为null");
 			e.appendMessage("属性名为null");
 			throw e;
 		} else {
 			String k = propertyKey.trim();
 			if (k.isEmpty()) {
 				LinkPropertiesKeyException e = new LinkPropertiesKeyException();
-				// e.setMessage(k + "属性名不是null，但是值为空");
 				e.appendMessage("属性名不是null，但是值为空");
 				throw e;
 			} else {
@@ -65,7 +63,6 @@ public class FileReader implements Reader {
 				} catch (Exception e1) {
 					LinkPropertiesValueException e = new LinkPropertiesValueException();
 					e.setStackTrace(e1.getStackTrace());
-					// e.setMessage("属性名 '" + k + "' 的值读取异常 , 检查值是否正确配置");
 					e.appendMessage("属性名：" + k);
 					throw e;
 				}

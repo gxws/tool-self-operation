@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Entity {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(Entity.class);
 
 	// 实体类对象类名（包名+类名）
 	private String entityClassName;
@@ -188,6 +188,15 @@ public class Entity {
 		return entityFieldString;
 	}
 
+	/**
+	 * 给大小写区分的字母添加下划线区分，并将大写字母转换成小写
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param uplow
+	 *            大小写区分的字符串
+	 * @return 转换后的字符串
+	 * @since 1.0
+	 */
 	public static String underline(String uplow) {
 		char[] uplowChar = uplow.toCharArray();
 		StringBuilder sb = new StringBuilder();
