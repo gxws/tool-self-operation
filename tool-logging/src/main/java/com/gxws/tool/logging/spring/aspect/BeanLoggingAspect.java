@@ -16,15 +16,23 @@ import com.gxws.tool.logging.constant.LoggingMarkerConstant;
  */
 public class BeanLoggingAspect {
 
-	private Logger log = LogManager.getLogger();
+	private static final Logger log = LogManager.getLogger(BeanLoggingAspect.class);
 
+	/**
+	 * spring bean方法调用前的aspect before<br>
+	 * 调用spring bean 方法时输入的参数，记录log中<br>
+	 * 将调用的spring bean 方法相关信息，记录到log的ThreadContext中
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param jp
+	 *            JoinPoint对象
+	 * @since 1.0
+	 */
 	public void before(JoinPoint jp) {
-		String location = jp.getTarget().getClass().getName() + "."
-				+ jp.getSignature().getName();
+		String location = jp.getTarget().getClass().getName() + "." + jp.getSignature().getName();
 		ThreadContext.push(location);
 		try {
-			log.info(LoggingMarkerConstant.BEAN_ASPECT_MARKER,
-					JSON.toJSON(jp.getArgs()));
+			log.info(LoggingMarkerConstant.BEAN_ASPECT_MARKER, JSON.toJSON(jp.getArgs()));
 		} catch (Exception e) {
 			StringBuffer sb = new StringBuffer("{");
 			for (Object o : jp.getArgs()) {
@@ -37,9 +45,17 @@ public class BeanLoggingAspect {
 		}
 	}
 
+	/**
+	 * spring bean方法调用前的aspect after对象<br>
+	 * 将调用的spring bean 方法相关信息，从log的ThreadContext中清除掉
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param jp
+	 *            JoinPoint对象
+	 * @since 1.0
+	 */
 	public void after(JoinPoint jp) {
-		String location = jp.getTarget().getClass().getName() + "."
-				+ jp.getSignature().getName();
+		String location = jp.getTarget().getClass().getName() + "." + jp.getSignature().getName();
 		if (location.endsWith(ThreadContext.peek())) {
 			ThreadContext.pop();
 		}

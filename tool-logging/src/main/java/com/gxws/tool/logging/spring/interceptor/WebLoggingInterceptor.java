@@ -22,7 +22,7 @@ import com.gxws.tool.logging.datamodel.HttpServletRequestDm;
  */
 public class WebLoggingInterceptor implements HandlerInterceptor {
 
-	private Logger log = LogManager.getLogger();
+	private static final Logger log = LogManager.getLogger(WebLoggingInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {

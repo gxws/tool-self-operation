@@ -4,9 +4,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.status.StatusLogger;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.gxws.tool.logging.plugin.nosql.NoSqlConnection;
@@ -24,7 +24,7 @@ import com.mongodb.ServerAddress;
  */
 public class MongoDbConnection implements NoSqlConnection<LoggingEntity> {
 
-	private final Logger log = StatusLogger.getLogger();
+	private static final Logger log = LogManager.getLogger(MongoDbConnection.class);
 
 	private MongoTemplate mt;
 

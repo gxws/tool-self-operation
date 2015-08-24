@@ -1,10 +1,10 @@
 package com.gxws.tool.logging.plugin.mongodb;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
-import org.apache.logging.log4j.status.StatusLogger;
 
 import com.gxws.tool.common.constant.ProjectConstant;
 import com.gxws.tool.logging.plugin.nosql.NoSqlProvider;
@@ -18,7 +18,7 @@ import com.gxws.tool.logging.plugin.nosql.NoSqlProvider;
 @Plugin(name = "MongoDbProvider", category = "Core", printObject = true)
 public class MongoDbProvider implements NoSqlProvider<MongoDbConnection> {
 
-	private static final Logger log = StatusLogger.getLogger();
+	private static final Logger log = LogManager.getLogger(MongoDbProvider.class);
 
 	private static final String defaultServers = "0.mongodb.gxwsxx.com:14000,1.mongodb.gxwsxx.com:14000,2.mongodb.gxwsxx.com:14000";
 
