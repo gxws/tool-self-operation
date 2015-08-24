@@ -16,7 +16,7 @@ import com.gxws.tool.common.exception.BaseException;
  */
 public class ResultReflectCore {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ResultReflectCore.class);
 
 	/**
 	 * 获取bo返回对象
@@ -33,8 +33,7 @@ public class ResultReflectCore {
 	 * @return bo方法返回的对象
 	 * @since 1.0
 	 */
-	public Object result(Object[] os, String methodName, Class<?> targetClass,
-			BaseException e) {
+	public Object result(Object[] os, String methodName, Class<?> targetClass, BaseException e) {
 		Class<?>[] osClass = new Class[os.length];
 		for (int i = 0; i < osClass.length; i++) {
 			osClass[i] = os[i].getClass();
@@ -61,6 +60,15 @@ public class ResultReflectCore {
 		return null;
 	}
 
+	/**
+	 * 是否BaseDao的子类
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param cls
+	 *            Class对象
+	 * @return 返回boolean值
+	 * @since 1.0
+	 */
 	private boolean isSubBaseDto(Class<?> cls) {
 		Class<?> sClass = cls.getSuperclass();
 		if (Object.class.equals(sClass)) {
