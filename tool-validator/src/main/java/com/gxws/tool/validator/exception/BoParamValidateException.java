@@ -9,6 +9,8 @@ import com.gxws.tool.common.exception.BaseException;
  * @since 1.0
  */
 public class BoParamValidateException extends BaseException {
+	private static final long serialVersionUID = 5824109305361522963L;
+
 	public String getMessage() {
 		return this.getMsg();
 	}

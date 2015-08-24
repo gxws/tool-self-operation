@@ -21,7 +21,7 @@ import com.gxws.tool.validator.exception.BoParamValidateException;
  */
 public class ValidateCore {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ValidateCore.class);
 
 	/**
 	 * 验证bo调用输入参数
