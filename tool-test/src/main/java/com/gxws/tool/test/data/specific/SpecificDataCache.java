@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.gxws.tool.test.exception.CacheNotFoundException;
 
 /**
@@ -17,8 +14,6 @@ import com.gxws.tool.test.exception.CacheNotFoundException;
  * @since 1.0
  */
 public class SpecificDataCache {
-
-	private final static Logger log = LoggerFactory.getLogger(SpecificDataCache.class);
 
 	private Map<Class<?>, List<Map<String, String>>> classMap = new HashMap<>();
 

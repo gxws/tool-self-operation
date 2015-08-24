@@ -8,4 +8,6 @@ package com.gxws.tool.test.exception;
  */
 public class CacheNotFoundException extends Exception {
 
+	private static final long serialVersionUID = -8939016669183212638L;
+
 }
