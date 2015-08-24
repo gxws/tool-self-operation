@@ -12,16 +12,13 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gxws.tool.common.constant.ProjectConstant;
 import com.gxws.tool.link.properties.classtool.ReflectClassTool;
 import com.gxws.tool.link.properties.classtool.ClassTool;
 import com.gxws.tool.link.properties.datamodel.Property;
 import com.gxws.tool.link.properties.exception.LinkPropertiesBaseException;
 import com.gxws.tool.link.properties.exception.LinkPropertiesReaderInitException;
-import com.gxws.tool.link.properties.reader.FileReader;
 import com.gxws.tool.link.properties.reader.Reader;
 import com.gxws.tool.link.properties.reader.ReaderFactory;
-import com.gxws.tool.link.properties.reader.ZookeeperReader;
 
 /**
  * 获取相应配置类，读取配置信息，并写入相应的变量
@@ -57,32 +54,6 @@ public class LinkPropertiesCore implements IPropertiesCore {
 		// initReader();
 		initReaderSpecific();
 		readLinkProperties();
-	}
-
-	/**
-	 * 初始化配置源读取Reader对象。
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @Deprecated 1.2以后废弃，修改配置读取策略，将从系统变量读取环境和读取策略。不再从环境变量判断读取策略。
-	 * @since 1.1
-	 */
-	@Deprecated
-	private void initReader() {
-		if (ProjectConstant.onlineEnvSet.contains(ProjectConstant.NAME_PROJECT_ENV)) {
-			try {
-				reader = new ZookeeperReader();
-			} catch (LinkPropertiesReaderInitException e) {
-				log.error("找不到 'link properties' 资源", e);
-				return;
-			}
-		} else {
-			try {
-				reader = new FileReader();
-			} catch (LinkPropertiesReaderInitException e) {
-				log.error("找不到 'link properties' 资源", e);
-				return;
-			}
-		}
 	}
 
 	/**
