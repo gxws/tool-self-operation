@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 需要处理的泛型实体类信息
  * 
- * @author zhuwl120820@gxwsxx.com 2015年2月3日下午2:44:40
+ * @author zhuwl120820@gxwsxx.com
  *
  */
 public class Entity {
@@ -54,16 +54,21 @@ public class Entity {
 
 	private final static String MAPPER_NAME = "com.gxws.tool.mybatis.mapper.Mapper";
 
-	public Entity(String methodFullName) {
+	/**
+	 * 根据方法全面创建Entity对象
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param methodFullName
+	 *            方法全名，包名.类名.方法名
+	 * @throws ClassNotFoundException
+	 *             没有找到类
+	 * @since 1.0
+	 */
+	public Entity(String methodFullName) throws ClassNotFoundException {
 		this.setMapperMethodName(methodFullName);
 		this.setMapperClassName(methodFullName);
-		try {
-			this.setMapperClass();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		ParameterizedType pt = superMapper(this.mapperClass
-				.getGenericInterfaces());
+		this.setMapperClass();
+		ParameterizedType pt = superMapper(this.mapperClass.getGenericInterfaces());
 		if (null != pt) {
 			this.setSubMapper(true);
 			this.setEntityClass(pt);
@@ -73,6 +78,15 @@ public class Entity {
 		}
 	}
 
+	/**
+	 * 获取接口的父类，是否属于Mapper子类
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param types
+	 *            当前接口的所有Type
+	 * @return 接口父类
+	 * @since 1.0
+	 */
 	private ParameterizedType superMapper(Type[] types) {
 		Class<?> superClass = null;
 		ParameterizedType pt = null;
@@ -81,8 +95,7 @@ public class Entity {
 				pt = (ParameterizedType) type;
 				superClass = (Class<?>) pt.getRawType();
 				if (MAPPER_NAME.equals(superClass.getName())) {
-					log.debug(this.getMapperClassName() + "是" + MAPPER_NAME
-							+ "的子类");
+					log.debug(this.getMapperClassName() + "是" + MAPPER_NAME + "的子类");
 					return pt;
 				}
 			}
@@ -137,18 +150,15 @@ public class Entity {
 	}
 
 	private void setMapperMethodName(String mapperMethodName) {
-		this.mapperMethodName = mapperMethodName.substring(mapperMethodName
-				.lastIndexOf(".") + 1);
+		this.mapperMethodName = mapperMethodName.substring(mapperMethodName.lastIndexOf(".") + 1);
 	}
 
 	private void setMapperClassName(String mapperClassName) {
-		this.mapperClassName = mapperClassName.substring(0,
-				mapperClassName.lastIndexOf("."));
+		this.mapperClassName = mapperClassName.substring(0, mapperClassName.lastIndexOf("."));
 	}
 
 	private void setMapperClass() throws ClassNotFoundException {
-		this.mapperClass = Class.forName(this.mapperClassName, false, this
-				.getClass().getClassLoader());
+		this.mapperClass = Class.forName(this.mapperClassName, false, this.getClass().getClassLoader());
 	}
 
 	private void setSubMapper(boolean subMapper) {

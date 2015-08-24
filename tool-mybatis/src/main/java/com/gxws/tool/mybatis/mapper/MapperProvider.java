@@ -34,7 +34,7 @@ import com.gxws.tool.mybatis.entity.PkField;
  */
 public class MapperProvider {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(MapperProvider.class);
 
 	private static Map<String, Method> providerMethodMap = new HashMap<>();
 
@@ -77,7 +77,13 @@ public class MapperProvider {
 	 * @since 1.0
 	 */
 	public void handle(MappedStatement ms) {
-		Entity en = getEntity(ms.getId());
+		Entity en = null;
+		try {
+			en = getEntity(ms.getId());
+		} catch (ClassNotFoundException e1) {
+			log.error(e1.getMessage(), e1);
+			return;
+		}
 		if (!en.isSubMapper()) {
 			return;
 		}
@@ -88,9 +94,9 @@ public class MapperProvider {
 		Method method = providerMethodMap.get(en.getMapperMethodName());
 		try {
 			method.invoke(this, ms, en);
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			log.error(e.getMessage(), e);
+			return;
 		}
 	}
 
@@ -108,8 +114,7 @@ public class MapperProvider {
 	 * @since 1.0
 	 */
 	private void resetValue(Object obj, String name, Object value) {
-		MetaObject mo = MetaObject.forObject(obj, new DefaultObjectFactory(),
-				new DefaultObjectWrapperFactory(),
+		MetaObject mo = MetaObject.forObject(obj, new DefaultObjectFactory(), new DefaultObjectWrapperFactory(),
 				new DefaultReflectorFactory());
 		mo.setValue(name, value);
 	}
@@ -120,10 +125,13 @@ public class MapperProvider {
 	 * @author zhuwl120820@gxwsxx.com 2015年2月5日下午2:22:52
 	 * 
 	 * @param methodFullName
+	 *            方法全名，包名.类名.方法名
 	 * @return 参数对象
+	 * @throws ClassNotFoundException
+	 *             没有找到类
 	 * @since 1.0
 	 */
-	private Entity getEntity(String methodFullName) {
+	private Entity getEntity(String methodFullName) throws ClassNotFoundException {
 		Entity en = enMap.get(methodFullName);
 		if (null == en) {
 			en = new Entity(methodFullName);
@@ -132,6 +140,16 @@ public class MapperProvider {
 		return en;
 	}
 
+	/**
+	 * Mapper接口select方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void select(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
@@ -139,22 +157,39 @@ public class MapperProvider {
 		FROM(en.getDbTableName());
 		WHERE(pk.getDbColumnName() + "=#{" + pk.getEntityField() + "}");
 		nodes.add(new StaticTextSqlNode(SQL()));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 		resetValue(ms.getResultMaps().get(0), "type", en.getEntityClass());
 	}
 
+	/**
+	 * Mapper接口noid方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void noid(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		nodes.add(new StaticTextSqlNode(
-				"select noid.get_noid(concat((select database()),'."
-						+ en.getDbTableName() + "'))"));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+				"select noid.get_noid(concat((select database()),'." + en.getDbTableName() + "'))"));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口insert方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void insert(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
@@ -163,11 +198,20 @@ public class MapperProvider {
 			VALUES(Entity.underline(fieldName), "#{" + fieldName + "}");
 		}
 		nodes.add(new StaticTextSqlNode(SQL()));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口insertNotNull方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void insertNotNull(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
@@ -176,31 +220,46 @@ public class MapperProvider {
 		List<SqlNode> ifColumnNodes = new ArrayList<SqlNode>();
 		List<SqlNode> ifValueNodes = new ArrayList<SqlNode>();
 		for (String fieldName : en.getEntityFieldSet()) {
-			ifColumnNodes.add(new IfSqlNode(new StaticTextSqlNode(Entity
-					.underline(fieldName) + ","), fieldName + "!=null"));
-			ifValueNodes.add(new IfSqlNode(new StaticTextSqlNode("#{"
-					+ fieldName + "},"), fieldName + "!=null"));
+			ifColumnNodes
+					.add(new IfSqlNode(new StaticTextSqlNode(Entity.underline(fieldName) + ","), fieldName + "!=null"));
+			ifValueNodes.add(new IfSqlNode(new StaticTextSqlNode("#{" + fieldName + "},"), fieldName + "!=null"));
 		}
-		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(
-				ifColumnNodes), "(", null, ")", ","));
-		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(
-				ifValueNodes), "VALUES (", null, ")", ","));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(ifColumnNodes), "(", null, ")", ","));
+		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(ifValueNodes), "VALUES (", null, ")", ","));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口delete方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void delete(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
 		DELETE_FROM(en.getDbTableName());
 		WHERE(pk.getDbColumnName() + "=#{" + pk.getEntityField() + "}");
 		nodes.add(new StaticTextSqlNode(SQL()));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口update方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void update(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
@@ -213,11 +272,20 @@ public class MapperProvider {
 		}
 		WHERE(pk.getDbColumnName() + "=#{" + pk.getEntityField() + "}");
 		nodes.add(new StaticTextSqlNode(SQL()));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口updateNotNull方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.0
+	 */
 	public void updateNotNull(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
@@ -228,28 +296,34 @@ public class MapperProvider {
 			if (pk.getEntityField().equals(fieldName)) {
 				continue;
 			} else {
-				ifNodes.add(new IfSqlNode(new StaticTextSqlNode(Entity
-						.underline(fieldName) + "=#{" + fieldName + "}" + ","),
+				ifNodes.add(new IfSqlNode(
+						new StaticTextSqlNode(Entity.underline(fieldName) + "=#{" + fieldName + "}" + ","),
 						fieldName + "!=null"));
 			}
 		}
-		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(
-				ifNodes), "SET ", null, "", ","));
-		nodes.add(new StaticTextSqlNode("WHERE " + pk.getDbColumnName() + "=#{"
-				+ pk.getEntityField() + "}"));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		nodes.add(new TrimSqlNode(ms.getConfiguration(), new MixedSqlNode(ifNodes), "SET ", null, "", ","));
+		nodes.add(new StaticTextSqlNode("WHERE " + pk.getDbColumnName() + "=#{" + pk.getEntityField() + "}"));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 	}
 
+	/**
+	 * Mapper接口count方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 1.1
+	 */
 	public void count(MappedStatement ms, Entity en) {
 		List<SqlNode> nodes = new ArrayList<>();
 		BEGIN();
 		SELECT("count(" + pk.getDbColumnName() + ")");
 		FROM(en.getDbTableName());
 		nodes.add(new StaticTextSqlNode(SQL()));
-		DynamicSqlSource sqlSource = new DynamicSqlSource(
-				ms.getConfiguration(), new MixedSqlNode(nodes));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
 		resetValue(ms, "sqlSource", sqlSource);
 		resetValue(ms.getResultMaps().get(0), "type", long.class);
 	}
