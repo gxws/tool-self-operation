@@ -12,6 +12,8 @@ import com.gxws.tool.logging.plugin.nosql.entity.LoggingEntity;
  * @author zhuwl120820@gxwsxx.com
  *
  * @param <W>
+ *            nosql数据对象
+ * @since 1.0
  */
 public interface NoSqlConnection<W extends LoggingEntity> extends Closeable {
 

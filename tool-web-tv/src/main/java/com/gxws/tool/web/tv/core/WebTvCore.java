@@ -43,6 +43,7 @@ public class WebTvCore {
 	 * @throws WebTvParameterIllegalException
 	 *             必要的参数非法异常
 	 * @throws UnsupportedEncodingException
+	 *             不支持的编码格式异常
 	 * @since 1.1
 	 */
 	public WebTvParam handleRequest(HttpServletRequest req)

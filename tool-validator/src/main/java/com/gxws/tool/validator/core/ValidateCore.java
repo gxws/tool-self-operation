@@ -37,19 +37,20 @@ public class ValidateCore {
 	 *             bo参数验证异常
 	 * @since 1.0
 	 */
-	public <T> void validate(Object[] os, String methodName, Class<?> targetClass) throws BoParamValidateException {
+	public void validate(Object[] os, String methodName, Class<?> targetClass) throws BoParamValidateException {
 		log.debug("验证输入参数");
 		StringBuffer sb = new StringBuffer();
 		for (Object o : os) {
-			Class<T> oClass = (Class<T>) o.getClass();
+			Class<?> oClass = (Class<?>) o.getClass();
 			Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-			Set<ConstraintViolation<T>> cv = validator.validate(oClass.cast(o), group(methodName, targetClass));
+			Set<?> cv = validator.validate(oClass.cast(o), group(methodName, targetClass));
 			if (0 != cv.size()) {
 				sb.append("[" + oClass.getName());
-				Iterator<ConstraintViolation<T>> it = cv.iterator();
+				Iterator<?> it = cv.iterator();
 				while (it.hasNext()) {
 					sb.append("(");
-					sb.append(it.next().getMessage());
+					ConstraintViolation<?> c = (ConstraintViolation<?>) it.next();
+					sb.append(c.getMessage());
 					sb.append(")");
 				}
 				sb.append("]");

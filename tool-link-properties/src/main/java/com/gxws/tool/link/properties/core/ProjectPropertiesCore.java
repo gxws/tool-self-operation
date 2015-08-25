@@ -38,6 +38,8 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	 * 以servlet方式启动项目<br>
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
+	 * @param servletContext
+	 *            项目的ServletContext对象
 	 * @since 1.1
 	 */
 	public ProjectPropertiesCore(ServletContext servletContext) {

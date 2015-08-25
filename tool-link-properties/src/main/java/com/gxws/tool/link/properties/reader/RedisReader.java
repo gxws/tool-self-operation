@@ -5,7 +5,7 @@ package com.gxws.tool.link.properties.reader;
  * 已定义，未实现。<br>
  * 
  * @author zhuwl120820@gxwsxx.com
- * @since
+ * @since 1.0
  */
 public class RedisReader implements RemoteReader {
 

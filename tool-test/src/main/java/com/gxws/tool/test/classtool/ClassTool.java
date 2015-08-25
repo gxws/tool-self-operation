@@ -39,7 +39,7 @@ public class ClassTool {
 	 * @author zhuwl120820@gxwsxx.com
 	 * @param cls
 	 *            orm对象类
-	 * @return
+	 * @return 随机记录条数
 	 * @since 1.0
 	 */
 	public int numberOfTime(Class<?> cls) {
@@ -64,11 +64,12 @@ public class ClassTool {
 	}
 
 	/**
+	 * 数组形式返回键值对
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @param cls
 	 *            orm对象类
-	 * @return
+	 * @return 键值对数组，[0]为key，[1]为value
 	 * @since 1.0
 	 */
 	public String[] keyvalue(Class<?> cls) {
@@ -89,7 +90,8 @@ public class ClassTool {
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @param uplow
-	 * @return
+	 *            uplow大小写间隔的字段名
+	 * @return 下划线间隔的字段名
 	 * @since 1.0
 	 */
 	public static String underline(String uplow) {
@@ -231,5 +233,5 @@ public class ClassTool {
 	private String specificValue(SpecificCache s) {
 		return sdc.get(s.referenceClass(), s.referenceField(), s.randomOrder());
 	}
-	
+
 }

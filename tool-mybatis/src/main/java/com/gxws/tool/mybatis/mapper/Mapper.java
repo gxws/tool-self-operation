@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.UpdateProvider;
  * 提供基础增删改查的泛型调用方法
  * 
  * @author zhuwl120820@gxwsxx.com 2015年2月1日下午4:26:55
+ * @since 1.0
  *
  */
 public interface Mapper<T> {
@@ -20,6 +21,7 @@ public interface Mapper<T> {
 	 * @param id
 	 *            数据的主键
 	 * @return 查询数据的对象，没有则返回null
+	 * @since 1.0
 	 */
 	@SelectProvider(method = "fakeSQL", type = MapperProvider.class)
 	public T select(String id);
@@ -29,6 +31,7 @@ public interface Mapper<T> {
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @return noid的值
+	 * @since 1.0
 	 */
 	@SelectProvider(method = "fakeSQL", type = MapperProvider.class)
 	public String noid();
@@ -40,6 +43,7 @@ public interface Mapper<T> {
 	 * @param o
 	 *            要insert的对象
 	 * @return 操作的记录数
+	 * @since 1.0
 	 */
 	@InsertProvider(method = "fakeSQL", type = MapperProvider.class)
 	public int insert(T o);
@@ -51,6 +55,7 @@ public interface Mapper<T> {
 	 * @param o
 	 *            要insert的对象
 	 * @return 操作的记录数
+	 * @since 1.0
 	 */
 	@InsertProvider(method = "fakeSQL", type = MapperProvider.class)
 	public int insertNotNull(T o);
@@ -62,6 +67,7 @@ public interface Mapper<T> {
 	 * @param o
 	 *            要update的对象
 	 * @return 操作的记录数
+	 * @since 1.0
 	 */
 	@UpdateProvider(method = "fakeSQL", type = MapperProvider.class)
 	public int update(T o);
@@ -73,6 +79,7 @@ public interface Mapper<T> {
 	 * @param o
 	 *            要update的对象
 	 * @return 操作的记录数
+	 * @since 1.0
 	 */
 	@UpdateProvider(method = "fakeSQL", type = MapperProvider.class)
 	public int updateNotNull(T o);
@@ -84,6 +91,7 @@ public interface Mapper<T> {
 	 * @param id
 	 *            数据的主键
 	 * @return 查询数据的对象，没有则返回null
+	 * @since 1.0
 	 */
 	@DeleteProvider(method = "fakeSQL", type = MapperProvider.class)
 	public int delete(String id);
@@ -92,7 +100,7 @@ public interface Mapper<T> {
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @return 记录数
-	 * @since
+	 * @since 1.1
 	 */
 	@SelectProvider(method = "fakeSQL", type = MapperProvider.class)
 	public long count();
