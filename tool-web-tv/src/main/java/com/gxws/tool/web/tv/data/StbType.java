@@ -8,7 +8,7 @@ import java.util.Set;
  * 机顶盒浏览器类型枚举类
  * 
  * @author zhuwl120820@gxwsxx.com
- * @ @since 1.1
+ * @since 1.1
  */
 public enum StbType {
 

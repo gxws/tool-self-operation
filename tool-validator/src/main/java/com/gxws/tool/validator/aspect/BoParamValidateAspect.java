@@ -29,8 +29,6 @@ public class BoParamValidateAspect {
 	 * @param pjp
 	 *            aop JoinPoint对象
 	 * @return bo bo方法返回的对象
-	 * @throws Throwable
-	 *             异常
 	 * @since 1.0
 	 */
 	public Object around(ProceedingJoinPoint pjp) {
