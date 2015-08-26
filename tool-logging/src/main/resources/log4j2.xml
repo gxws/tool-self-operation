@@ -17,7 +17,7 @@
 		<Console name="consoleAppender" target="SYSTEM_OUT">
 			<PatternLayout pattern="${formate}" />
 		</Console>
-		<RollingFile name="rollingFileAppender" fileName="../logs/${pName}.log"
+		<RollingFile name="rollingFileAppender" fileName="../logs/${web:servletContextName}.log"
 			filePattern="../logs/$${date:yyyy-MM}/${pName}-%d{MM-dd-yyyy}-%i.log.gz">
 			<PatternLayout pattern="${formate}" />
 			<Policies>

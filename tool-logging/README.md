@@ -33,7 +33,7 @@ mail list:朱伟亮 \<zhuwl120820@gxwsxx.com>
 去除dubbo依赖。<br>
 
 ### 2.1.0
-修改log4j2.xml配置文件名为log4j2-exsample.xml。<br>
+修改log4j2.xml配置文件指定日志文件名部分。<br>
 
 功能点
 ---
