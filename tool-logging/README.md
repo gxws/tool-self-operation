@@ -32,6 +32,9 @@ mail list:朱伟亮 \<zhuwl120820@gxwsxx.com>
 去除dubbo的拦截器。<br>
 去除dubbo依赖。<br>
 
+### 2.1.0
+修改log4j2.xml配置文件名为log4j2-exsample.xml。<br>
+
 功能点
 ---
 ### 1.收集，收集信息包括：

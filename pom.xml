@@ -74,9 +74,15 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- tool -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>tool-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>tool-logging</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
