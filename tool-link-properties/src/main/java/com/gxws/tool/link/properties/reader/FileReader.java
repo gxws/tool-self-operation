@@ -21,6 +21,8 @@ public class FileReader implements Reader {
 	// 文件名为link.properties
 	private static final String LINK_FILE_NAME = "link";
 
+	private ProjectConstant pc;
+
 	/**
 	 * 从本地文件配置源中获取配置信息
 	 * 
@@ -29,7 +31,8 @@ public class FileReader implements Reader {
 	 *             配置读取对象初始化异常
 	 * @since 1.0
 	 */
-	public FileReader() throws LinkPropertiesReaderInitException {
+	public FileReader(ProjectConstant pc) throws LinkPropertiesReaderInitException {
+		this.pc = pc;
 		try {
 			linkFile = ResourceBundle.getBundle(LINK_FILE_NAME);
 		} catch (Exception e1) {
@@ -45,7 +48,7 @@ public class FileReader implements Reader {
 	 */
 	@Override
 	public String valueString(String propertyKey) throws LinkPropertiesBaseException {
-		ProjectConstant pc = ProjectConstant.instance();
+		// ProjectConstant pc = ProjectConstant.instance();
 		if (propertyKey == null) {
 			LinkPropertiesKeyException e = new LinkPropertiesKeyException();
 			e.appendMessage("属性名为null");

@@ -1,7 +1,6 @@
 package com.gxws.tool.link.properties.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -11,8 +10,10 @@ import javax.servlet.ServletContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import com.gxws.tool.link.properties.classtool.ReflectClassTool;
+import com.gxws.tool.common.constant.ProjectConstant;
 import com.gxws.tool.link.properties.classtool.ClassTool;
 import com.gxws.tool.link.properties.datamodel.Property;
 import com.gxws.tool.link.properties.exception.LinkPropertiesBaseException;
@@ -28,7 +29,7 @@ import com.gxws.tool.link.properties.reader.ReaderFactory;
  */
 public class LinkPropertiesCore implements IPropertiesCore {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(LinkPropertiesCore.class);
 
 	private ClassTool ct = new ReflectClassTool();
 
@@ -38,6 +39,8 @@ public class LinkPropertiesCore implements IPropertiesCore {
 
 	private Set<Property> propertySet;
 
+	private ProjectConstant pc;
+
 	private static final String READER_SYSTEM_PROPERTY_KEY = "link.properties.reader";
 
 	/**
@@ -45,13 +48,13 @@ public class LinkPropertiesCore implements IPropertiesCore {
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @param classnames
-	 *            要读取配置的静态类列表
+	 *            要读取配置的静态类名列表
 	 *
 	 * @since 1.1
 	 */
-	public LinkPropertiesCore(List<String> classnames) {
+	public LinkPropertiesCore(List<String> classnames, ProjectConstant projectConstant) {
+		pc = projectConstant;
 		constantClassList = ct.forClasses(classnames);
-		// initReader();
 		initReaderSpecific();
 		readLinkProperties();
 	}
@@ -68,11 +71,8 @@ public class LinkPropertiesCore implements IPropertiesCore {
 	 */
 	private void initReaderSpecific() {
 		String name = System.getProperty(READER_SYSTEM_PROPERTY_KEY);
-		if (null == name) {
-			name = "file";
-		}
 		try {
-			this.reader = ReaderFactory.newReaderInstance(name);
+			this.reader = ReaderFactory.newReaderInstance(name, pc);
 		} catch (LinkPropertiesReaderInitException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -107,29 +107,29 @@ public class LinkPropertiesCore implements IPropertiesCore {
 		}
 	}
 
-	/**
-	 * 不指定静态类，只读取默认系统参数
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 *
-	 * @since 1.1
-	 */
-	public LinkPropertiesCore() {
-		this(new ArrayList<String>());
-	}
+	// /**
+	// * 不指定静态类，只读取默认系统参数
+	// *
+	// * @author zhuwl120820@gxwsxx.com
+	// *
+	// * @since 1.1
+	// */
+	// public LinkPropertiesCore() {
+	// this(new ArrayList<String>());
+	// }
 
-	/**
-	 * 指定静态类，参数以String方式指定
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param classnames
-	 *            要读取配置的静态类，以","符号进行分隔
-	 *
-	 * @since 1.1
-	 */
-	public LinkPropertiesCore(String classnames) {
-		this(new ArrayList<String>(Arrays.asList(classnames.split(","))));
-	}
+	// /**
+	// * 指定静态类，参数以String方式指定
+	// *
+	// * @author zhuwl120820@gxwsxx.com
+	// * @param classnames
+	// * 要读取配置的静态类，以","符号进行分隔
+	// *
+	// * @since 1.1
+	// */
+	// public LinkPropertiesCore(String classnames) {
+	// this(new ArrayList<String>(Arrays.asList(classnames.split(","))));
+	// }
 
 	/**
 	 * 添加静态读取类
@@ -158,13 +158,7 @@ public class LinkPropertiesCore implements IPropertiesCore {
 	}
 
 	/**
-	 * 设置自定义变量到spring配置
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param props
-	 *            spring配置读取的Properties对象
-	 *
-	 * @since 1.1
+	 * @see com.gxws.tool.link.properties.core.IPropertiesCore#springProperties(java.util.Properties)
 	 */
 	@Override
 	public void springProperties(Properties props) {
@@ -174,13 +168,7 @@ public class LinkPropertiesCore implements IPropertiesCore {
 	}
 
 	/**
-	 * 设置自定义变量到servlet context
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param servletContext
-	 *            ServletContext对象
-	 *
-	 * @since 1.1
+	 * @see com.gxws.tool.link.properties.core.IPropertiesCore#servletContextProperties(javax.servlet.ServletContext)
 	 */
 	@Override
 	public void servletContextProperties(ServletContext servletContext) {

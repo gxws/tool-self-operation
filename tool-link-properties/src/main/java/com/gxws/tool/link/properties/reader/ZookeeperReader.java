@@ -26,6 +26,8 @@ public class ZookeeperReader implements RemoteReader {
 
 	private CuratorFramework cf;
 
+	private ProjectConstant pc;
+
 	/**
 	 * 创建ZookeeperReader实例
 	 * 
@@ -34,7 +36,8 @@ public class ZookeeperReader implements RemoteReader {
 	 *             配置读取对象初始化异常
 	 * @since 1.0
 	 */
-	public ZookeeperReader() throws LinkPropertiesReaderInitException {
+	public ZookeeperReader(ProjectConstant pc) throws LinkPropertiesReaderInitException {
+		this.pc = pc;
 		try {
 			Builder builder = CuratorFrameworkFactory.builder().connectString(DEFAULT_ADDR_ZOOKEEPER)
 					.connectionTimeoutMs(5000).sessionTimeoutMs(5000).retryPolicy(new ExponentialBackoffRetry(1000, 3));
@@ -55,7 +58,7 @@ public class ZookeeperReader implements RemoteReader {
 	 */
 	@Override
 	public String valueString(String propertyKey) {
-		ProjectConstant pc = ProjectConstant.instance();
+		// ProjectConstant pc = ProjectConstant.instance();
 		String path = "/" + pc.getEnv() + "/" + pc.getName() + "/" + propertyKey;
 		try {
 			return new String(cf.getData().forPath(path), "utf-8");

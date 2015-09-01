@@ -30,21 +30,24 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 
 	private static final Logger log = LoggerFactory.getLogger(ProjectPropertiesCore.class);
 
-	private ProjectConstant pc = ProjectConstant.instance();
+	private ProjectConstant pc;
 
 	private ServletContext sc;
 
 	/**
-	 * 以servlet方式启动项目<br>
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @param servletContext
-	 *            项目的ServletContext对象
-	 * @since 1.1
+	 *            ServletContext对象
+	 * @param applicationContext
+	 *            spring application context对象
+	 * @since 2.1
 	 */
-	public ProjectPropertiesCore(ServletContext servletContext) {
-		this.sc = servletContext;
+	public ProjectPropertiesCore(ServletContext servletContext, ProjectConstant projectConstant) {
+		pc = projectConstant;
+		sc = servletContext;
 		readPropertiesProperties();
+		sc.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
 	}
 
 	/**
@@ -79,25 +82,20 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 		}
 	}
 
-	/**
-	 * 获取项目全局变量参数
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @return 项目全局变量
-	 *
-	 * @since 1.1
-	 */
-	public ProjectConstant getProjectConstant() {
-		return pc;
-	}
+	// /**
+	// * 获取项目全局变量参数
+	// *
+	// * @author zhuwl120820@gxwsxx.com
+	// * @return 项目全局变量
+	// *
+	// * @since 1.1
+	// */
+	// public ProjectConstant getProjectConstant() {
+	// return pc;
+	// }
 
 	/**
-	 * 设置全局变量到spring配置
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param props
-	 *            spring配置读取的Properties对象
-	 * @since 1.1
+	 * @see com.gxws.tool.link.properties.core.IPropertiesCore#springProperties(java.util.Properties)
 	 */
 	@Override
 	public void springProperties(Properties props) {
@@ -105,18 +103,13 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	}
 
 	/**
-	 * 设置全局变量到servlet context
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param servletContext
-	 *            ServletContext对象
-	 * @since 1.1
+	 * @see com.gxws.tool.link.properties.core.IPropertiesCore#servletContextProperties(javax.servlet.ServletContext)
 	 */
 	@Override
 	public void servletContextProperties(ServletContext servletContext) {
 		if (null != servletContext) {
 			pc.getAll().entrySet().forEach(en -> servletContext.setAttribute(en.getKey(), en.getValue()));
-			servletContext.setAttribute("project", pc);
+			// servletContext.setAttribute("project", pc);
 			servletContext.setAttribute("ctx", pc.getContextPath());
 		}
 	}
@@ -159,7 +152,7 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	}
 
 	/**
-	 * 获取maven信息文件
+	 * 从maven信息文件获取项目名称和项目版本
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
 	 * @return maven信息文件
