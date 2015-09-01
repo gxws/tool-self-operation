@@ -51,7 +51,7 @@ public class LoggingEntity implements Serializable {
 		if (null != event.getContextStack()) {
 			setContextStack(event.getContextStack().asList().toArray());
 		}
-		setProject(new ProjectEntity());
+//		setProject(new ProjectEntity());
 	}
 
 	public String getLevel() {

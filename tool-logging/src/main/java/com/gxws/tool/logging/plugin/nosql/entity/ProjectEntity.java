@@ -16,13 +16,13 @@ public class ProjectEntity {
 	private String ip;
 	private String port;
 
-	public ProjectEntity() {
+	public ProjectEntity(ProjectConstant pc) {
 		// setEnv(ProjectConstant.VALUE_PROJECT_ENV);
 		// setName(ProjectConstant.VALUE_PROJECT_NAME);
 		// setVersion(ProjectConstant.VALUE_PROJECT_VERSION);
 		// setIp(ProjectConstant.VALUE_PROJECT_IP);
 		// setPort(ProjectConstant.VALUE_PROJECT_PORT);
-		ProjectConstant pc = ProjectConstant.instance();
+		// ProjectConstant pc = ProjectConstant.instance();
 		setEnv(pc.getEnv());
 		setName(pc.getName());
 		setVersion(pc.getVersion());
