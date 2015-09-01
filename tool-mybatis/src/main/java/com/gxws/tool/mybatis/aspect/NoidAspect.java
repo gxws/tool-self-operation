@@ -32,7 +32,7 @@ public class NoidAspect {
 			try {
 				noidSetterMethod = entity.getClass().getMethod("setNoid", String.class);
 			} catch (NoSuchMethodException e1) {
-				log.debug("没有noid属性 " + e1.getLocalizedMessage(), e1);
+				//"没有noid属性 "，跳过
 				return;
 			}
 			Method noidGetterMethod = mapper.getClass().getMethod("noid", new Class<?>[0]);
