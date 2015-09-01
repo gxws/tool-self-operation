@@ -1,12 +1,15 @@
 package com.gxws.tool.logging.plugin.mongodb;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 
-import com.gxws.tool.common.constant.ProjectConstant;
 import com.gxws.tool.logging.plugin.nosql.NoSqlProvider;
 
 /**
@@ -23,6 +26,9 @@ public class MongoDbProvider implements NoSqlProvider<MongoDbConnection> {
 	private static final String defaultServers = "0.mongodb.gxwsxx.com:14000,1.mongodb.gxwsxx.com:14000,2.mongodb.gxwsxx.com:14000";
 
 	private static final String defaultName = "logging";
+
+	private final static Set<String> onlineEnvSet = new HashSet<String>(
+			Arrays.asList(new String[] { "dev", "test", "real" }));
 
 	private MongoDbConnection conn;
 
@@ -45,10 +51,8 @@ public class MongoDbProvider implements NoSqlProvider<MongoDbConnection> {
 	 * @param password
 	 *            密码
 	 */
-	private MongoDbProvider(String servers, String databaseName,
-			String username, String password) {
-		log.info("创建日志存储链接：" + servers + " " + databaseName + " " + username
-				+ " " + password);
+	private MongoDbProvider(String servers, String databaseName, String username, String password) {
+		log.info("创建日志存储链接：" + servers + " " + databaseName + " " + username + " " + password);
 		conn = new MongoDbConnection(servers, databaseName, username, password);
 	}
 
@@ -61,15 +65,12 @@ public class MongoDbProvider implements NoSqlProvider<MongoDbConnection> {
 	public static MongoDbProvider createLoggingMongoDbProvider(
 			@PluginAttribute("collectionName") final String collectionName,
 			@PluginAttribute("databaseName") final String databaseName,
-			@PluginAttribute("servers") final String servers,
-			@PluginAttribute("username") final String username,
-			@PluginAttribute("password") final String password,
-			@PluginAttribute("env") final String env) {
-		if (ProjectConstant.onlineEnvSet.contains(env)) {
-			return new MongoDbProvider(ifblank(servers, "servers",
-					defaultServers), ifblank(databaseName, "databaseName",
-					defaultName), ifblank(username, "username", ""), ifblank(
-					password, "password", ""));
+			@PluginAttribute("servers") final String servers, @PluginAttribute("username") final String username,
+			@PluginAttribute("password") final String password, @PluginAttribute("env") final String env) {
+		if (onlineEnvSet.contains(env)) {
+			return new MongoDbProvider(ifblank(servers, "servers", defaultServers),
+					ifblank(databaseName, "databaseName", defaultName), ifblank(username, "username", ""),
+					ifblank(password, "password", ""));
 		} else {
 			return new MongoDbProvider();
 		}

@@ -34,6 +34,7 @@ mail list:朱伟亮 \<zhuwl120820@gxwsxx.com>
 
 ### 2.1.0
 修改log4j2.xml配置文件指定日志文件名部分。<br>
+修改tool-common项目的ProjectConstant不再提供制定线上环境的变量，修改为MongoDbProvider类成员变量。<br>
 
 功能点
 ---
