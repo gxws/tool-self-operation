@@ -37,7 +37,7 @@
 	<properties>
 
 		<!-- spring -->
-		<version.springframework>4.1.7.RELEASE</version.springframework>
+		<version.springframework>4.2.0.RELEASE</version.springframework>
 		<version.aspectjweaver>1.8.2</version.aspectjweaver>
 
 		<!-- servlet -->
