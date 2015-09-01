@@ -1,28 +1,26 @@
 package com.gxws.tool.common.constant;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 项目信息，属性值<br>
- * 以单例方式读取<br>
- * 读取项目名：ProjectConstant.instance().getName();
+ * 2.1版本以后，需要定义为spring的bean。<br>
  * 
- * @author zhuwl120820@gxwsxx.com 2015年2月27日下午5:33:56
- *
+ * @author zhuwl120820@gxwsxx.com
+ * @since 1.0
  */
 public class ProjectConstant {
 
-	/**
-	 * 线上环境定义。env的值等于set内的其中一项时，将启用以下功能：<br>
-	 * 远程配置读取功能，项目tool-link-properties。<br>
-	 * 远程日志存储功能，项目tool-logging。<br>
-	 */
-	public final static Set<String> onlineEnvSet = new HashSet<String>(
-			Arrays.asList(new String[] { "dev", "test", "real" }));
+	// /**
+	// * 线上环境定义。env的值等于set内的其中一项时，将启用以下功能：<br>
+	// * 远程配置读取功能，项目tool-link-properties。<br>
+	// * 远程日志存储功能，项目tool-logging。<br>
+	// */
+	// public final static Set<String> onlineEnvSet = new HashSet<String>(
+	// Arrays.asList(new String[] { "dev", "test", "real" }));
+
+	public static final String CONTEXT_NAME = "PROJECT_CONSTANT";
 
 	private String name = "name_default";// 项目名
 
@@ -48,31 +46,51 @@ public class ProjectConstant {
 
 	public static final String NAME_PROJECT_CONTEXT_PATH = "project.context.path";
 
-	private Map<String, String> map = new HashMap<>();
+	// private Map<String, String> map = new HashMap<>();
 
-	private static ProjectConstant self;
+	// private static ProjectConstant self;
 
-	private ProjectConstant() {
+	// private ProjectConstant() {
+	//
+	// }
+	//
+	// public static ProjectConstant instance() {
+	// if (null == self) {
+	// self = new ProjectConstant();
+	// }
+	// return self;
+	// }
 
-	}
+	// public void put(String key, String value) {
+	// map.put(key, value);
+	// }
+	//
+	// public String get(String key) {
+	// return map.get(key);
+	// }
 
-	public static ProjectConstant instance() {
-		if (null == self) {
-			self = new ProjectConstant();
-		}
-		return self;
-	}
+	// public Map<String, String> getAll() {
+	// return map;
+	// }
 
-	public static void put(String key, String value) {
-		self.map.put(key, value);
-	}
-
-	public static String get(String key) {
-		return self.map.get(key);
-	}
-
+	/**
+	 * Map方式获取项目信息
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @return 返回Map键值项目信息
+	 * @since 2.1
+	 */
 	public Map<String, String> getAll() {
-		return map;
+		return new HashMap<String, String>() {
+			{
+				put(NAME_PROJECT_NAME, name);
+				put(NAME_PROJECT_ENV, env);
+				put(NAME_PROJECT_VERSION, version);
+				put(NAME_PROJECT_IP, ip);
+				put(NAME_PROJECT_PORT, port);
+				put(NAME_PROJECT_CONTEXT_PATH, contextPath);
+			}
+		};
 	}
 
 	public String getName() {
@@ -80,10 +98,10 @@ public class ProjectConstant {
 	}
 
 	public void setName(String name) {
-		if (null != name && !"".equals(name)) {
+		if (null != name && !name.isEmpty()) {
 			this.name = name;
 		}
-		map.put(NAME_PROJECT_NAME, this.name);
+		// map.put(NAME_PROJECT_NAME, this.name);
 	}
 
 	public String getEnv() {
@@ -91,10 +109,10 @@ public class ProjectConstant {
 	}
 
 	public void setEnv(String env) {
-		if (null != env && !"".equals(env)) {
+		if (null != env && !env.isEmpty()) {
 			this.env = env;
 		}
-		map.put(NAME_PROJECT_ENV, this.env);
+		// map.put(NAME_PROJECT_ENV, this.env);
 	}
 
 	public String getVersion() {
@@ -102,10 +120,10 @@ public class ProjectConstant {
 	}
 
 	public void setVersion(String version) {
-		if (null != version && !"".equals(version)) {
+		if (null != version && !version.isEmpty()) {
 			this.version = version;
 		}
-		map.put(NAME_PROJECT_VERSION, this.version);
+		// map.put(NAME_PROJECT_VERSION, this.version);
 	}
 
 	public String getIp() {
@@ -113,10 +131,10 @@ public class ProjectConstant {
 	}
 
 	public void setIp(String ip) {
-		if (null != ip && !"".equals(ip)) {
+		if (null != ip && !ip.isEmpty()) {
 			this.ip = ip;
 		}
-		map.put(NAME_PROJECT_IP, this.ip);
+		// map.put(NAME_PROJECT_IP, this.ip);
 	}
 
 	public String getPort() {
@@ -124,10 +142,10 @@ public class ProjectConstant {
 	}
 
 	public void setPort(String port) {
-		if (null != port && !"".equals(port)) {
+		if (null != port && !port.isEmpty()) {
 			this.port = port;
 		}
-		map.put(NAME_PROJECT_PORT, this.port);
+		// map.put(NAME_PROJECT_PORT, this.port);
 	}
 
 	public String getContextPath() {
@@ -135,10 +153,10 @@ public class ProjectConstant {
 	}
 
 	public void setContextPath(String contextPath) {
-		if (null != contextPath && !"".equals(contextPath)) {
+		if (null != contextPath && !contextPath.isEmpty()) {
 			this.contextPath = contextPath;
 		}
-		map.put(NAME_PROJECT_CONTEXT_PATH, this.contextPath);
+		// map.put(NAME_PROJECT_CONTEXT_PATH, this.contextPath);
 	}
 
 }
