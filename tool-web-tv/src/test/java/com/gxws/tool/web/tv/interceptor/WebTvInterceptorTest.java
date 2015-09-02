@@ -16,7 +16,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.gxws.tool.web.tv.data.WebTvParam;
+import com.gxws.tool.web.tv.data.WebTvUserParam;
 import com.gxws.tool.web.tv.exception.WebTvParameterException;
 
 @WebAppConfiguration
@@ -42,13 +42,13 @@ public class WebTvInterceptorTest extends AbstractTestNGSpringContextTests {
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/testurl1?" + param))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvParam p = (WebTvParam) result.getRequest().getAttribute(WebTvParam.ATTR_NAME);
+		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTR_NAME);
 		Assert.assertEquals(p.getStbId(), "123");
 		Assert.assertEquals(p.getDvbId(), "213");
 		Assert.assertEquals(p.getAreaId(), "321");
 		Assert.assertEquals(p.getStbType(), "0003");
 		Assert.assertEquals(p.getUrl(), "&" + param);
-		System.out.println(p.getTime());
+//		System.out.println(p.getTime());
 	}
 
 	@Test(expectedExceptions = { NestedServletException.class, WebTvParameterException.class })
@@ -92,7 +92,7 @@ public class WebTvInterceptorTest extends AbstractTestNGSpringContextTests {
 				.get("/testurl1?device_id=123&user_id=213&area_code=321&stbType=0002").header("User-Agent", "abc"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvParam p = (WebTvParam) result.getRequest().getAttribute(WebTvParam.ATTR_NAME);
+		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTR_NAME);
 		Assert.assertEquals(p.getStbId(), "123");
 		Assert.assertEquals(p.getDvbId(), "213");
 		Assert.assertEquals(p.getAreaId(), "321");
@@ -106,7 +106,7 @@ public class WebTvInterceptorTest extends AbstractTestNGSpringContextTests {
 				.get("/testurl1?device_id=123&user_id=213&area_code=321&device_type=0002").header("User-Agent", "abc"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvParam p = (WebTvParam) result.getRequest().getAttribute(WebTvParam.ATTR_NAME);
+		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTR_NAME);
 		Assert.assertEquals(p.getStbId(), "123");
 		Assert.assertEquals(p.getDvbId(), "213");
 		Assert.assertEquals(p.getAreaId(), "321");
@@ -122,7 +122,7 @@ public class WebTvInterceptorTest extends AbstractTestNGSpringContextTests {
 								"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvParam p = (WebTvParam) result.getRequest().getAttribute(WebTvParam.ATTR_NAME);
+		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTR_NAME);
 		Assert.assertEquals(p.getStbId(), "123");
 		Assert.assertEquals(p.getDvbId(), "213");
 		Assert.assertEquals(p.getAreaId(), "321");

@@ -2,43 +2,38 @@ package com.gxws.tool.web.tv.data;
 
 import java.io.Serializable;
 
-import com.gxws.tool.web.tv.annotation.WebTvParameter;
+import com.gxws.tool.web.tv.annotation.WebTvUserParameter;
 
 /**
- * web tv 相关参数<br>
+ * 电视用户访问相关参数<br>
  * 
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.1
  */
-public class WebTvParam implements Serializable {
+public class WebTvUserParam implements Serializable {
 	private static final long serialVersionUID = -5977138155006302596L;
 
-	public static final String ATTR_NAME = "webTv";
-
-	// public static final String URL_PARAM_NAME = "webTvUrl";
+	public static final String ATTR_NAME = "webTvUser";
 
 	// 机顶盒编号
-	@WebTvParameter(name = { "stbId", "device_id" }, description = "机顶盒编号")
+	@WebTvUserParameter(name = { "stbId", "device_id" }, description = "机顶盒编号")
 	private String stbId;
 
 	// dvb用户编号
-	@WebTvParameter(name = { "dvbId", "user_id" }, description = "用户编号")
+	@WebTvUserParameter(name = { "dvbId", "user_id" }, description = "用户编号")
 	private String dvbId;
 
 	// 区域编号
-	@WebTvParameter(name = { "areaId", "area_code" }, description = "区域码")
+	@WebTvUserParameter(name = { "areaId", "area_code" }, description = "区域码")
 	private String areaId;
 
 	// 机顶盒类型
-	@WebTvParameter(name = { "stbType", "device_type" }, description = "机顶盒类型")
+	@WebTvUserParameter(name = { "stbType", "device_type" }, description = "机顶盒类型")
 	private String stbType;
 
-	// url参数
+	// url参数，格式 &stbId=123&dvbId=456&areaId=789&stbType=0003
 	private String url;
-
-	// 时间
-	private String time;
 
 	public String getStbId() {
 		return stbId;
@@ -80,11 +75,4 @@ public class WebTvParam implements Serializable {
 		this.url = url;
 	}
 
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
 }

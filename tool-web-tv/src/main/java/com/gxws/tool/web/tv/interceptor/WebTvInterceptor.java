@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gxws.tool.web.tv.core.WebTvCore;
+import com.gxws.tool.web.tv.core.WebTvCollectionCore;
+import com.gxws.tool.web.tv.core.WebTvNowTimeCore;
+import com.gxws.tool.web.tv.core.WebTvUserParameterCore;
 
 /**
  * 处理电视机顶盒访问参数
@@ -16,7 +18,14 @@ import com.gxws.tool.web.tv.core.WebTvCore;
  */
 public class WebTvInterceptor implements HandlerInterceptor {
 
-	private WebTvCore core = new WebTvCore();
+	private WebTvUserParameterCore pCore = new WebTvUserParameterCore();
+
+	private WebTvCollectionCore cCore = new WebTvCollectionCore();
+
+	private WebTvNowTimeCore tCore = new WebTvNowTimeCore();
+
+	// 收集用户信息url
+	private String webTvCollectUrl;
 
 	/**
 	 * @see org.springframework.web.servlet.HandlerInterceptor#preHandle(javax.servlet.http.HttpServletRequest,
@@ -26,7 +35,7 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// 处理参数
-		core.handleRequest(request);
+		pCore.handleRequest(request);
 		return true;
 	}
 
@@ -39,7 +48,9 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// 处理时间
-		core.handleWebTvTime(request);
+//		pCore.handleWebTvTime(request);
+		tCore.handleWebTvTime(request);
+		cCore.handleColletionUrl(request, webTvCollectUrl);
 	}
 
 	/**
@@ -50,6 +61,14 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
+	}
+
+	public String getWebTvCollectUrl() {
+		return webTvCollectUrl;
+	}
+
+	public void setWebTvCollectUrl(String webTvCollectUrl) {
+		this.webTvCollectUrl = webTvCollectUrl;
 	}
 
 }

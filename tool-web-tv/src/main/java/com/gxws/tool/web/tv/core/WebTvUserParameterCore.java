@@ -2,30 +2,26 @@ package com.gxws.tool.web.tv.core;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.gxws.tool.web.tv.annotation.WebTvParameter;
+import com.gxws.tool.web.tv.annotation.WebTvUserParameter;
 import com.gxws.tool.web.tv.data.StbType;
-import com.gxws.tool.web.tv.data.WebTvParam;
-import com.gxws.tool.web.tv.exception.WebTvParameterIllegalException;
-import com.gxws.tool.web.tv.exception.WebTvParameterMissingException;
+import com.gxws.tool.web.tv.data.WebTvUserParam;
+import com.gxws.tool.web.tv.exception.WebTvUserParameterIllegalException;
+import com.gxws.tool.web.tv.exception.WebTvUserParameterMissingException;
 
 /**
- * 电视用户信息处理类
+ * 电视用户访问参数处理类
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.0
  */
-public class WebTvCore {
+public class WebTvUserParameterCore {
 
 	private static final Pattern STB_0203 = Pattern.compile("(Safari)|(Chrome)", Pattern.CASE_INSENSITIVE);
-
-	private static final int[] CALENDAR_ARR = new int[] { Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH,
-			Calendar.DAY_OF_WEEK, Calendar.HOUR_OF_DAY, Calendar.MINUTE, Calendar.SECOND };
 
 	/**
 	 * 处理request参数
@@ -34,24 +30,24 @@ public class WebTvCore {
 	 * @param req
 	 *            HttpServletRequest
 	 * @return web tv 相关参数
-	 * @throws WebTvParameterMissingException
+	 * @throws WebTvUserParameterMissingException
 	 *             必要的参数缺失
 	 * @throws IllegalArgumentException
 	 *             非法参数异常
 	 * @throws IllegalAccessException
 	 *             非法访问权限异常
-	 * @throws WebTvParameterIllegalException
+	 * @throws WebTvUserParameterIllegalException
 	 *             必要的参数非法异常
 	 * @throws UnsupportedEncodingException
 	 *             不支持的编码格式异常
 	 * @since 1.1
 	 */
-	public WebTvParam handleRequest(HttpServletRequest req)
-			throws WebTvParameterMissingException, IllegalArgumentException, IllegalAccessException,
-			WebTvParameterIllegalException, UnsupportedEncodingException {
-		WebTvParam param = new WebTvParam();
+	public WebTvUserParam handleRequest(HttpServletRequest req)
+			throws WebTvUserParameterMissingException, IllegalArgumentException, IllegalAccessException,
+			WebTvUserParameterIllegalException, UnsupportedEncodingException {
+		WebTvUserParam param = new WebTvUserParam();
 		// 处理请求参数
-		Class<WebTvParam> cls = WebTvParam.class;
+		Class<WebTvUserParam> cls = WebTvUserParam.class;
 		Field[] fields = cls.getDeclaredFields();
 		for (Field f : fields) {
 			handleField(f, param, req);
@@ -65,7 +61,7 @@ public class WebTvCore {
 		// 处理url
 		String url = handleUrlParam(param);
 		param.setUrl(url);
-		req.setAttribute(WebTvParam.ATTR_NAME, param);
+		req.setAttribute(WebTvUserParam.ATTR_NAME, param);
 		return param;
 	}
 
@@ -79,7 +75,7 @@ public class WebTvCore {
 	 *            web tv 相关参数对象
 	 * @param req
 	 *            HttpServletRequest
-	 * @throws WebTvParameterMissingException
+	 * @throws WebTvUserParameterMissingException
 	 *             必要的参数缺失
 	 * @throws IllegalArgumentException
 	 *             非法参数异常
@@ -87,9 +83,9 @@ public class WebTvCore {
 	 *             非法访问权限异常
 	 * @since 1.1
 	 */
-	public void handleField(Field f, WebTvParam param, HttpServletRequest req)
-			throws WebTvParameterMissingException, IllegalArgumentException, IllegalAccessException {
-		WebTvParameter ann = f.getAnnotation(WebTvParameter.class);
+	public void handleField(Field f, WebTvUserParam param, HttpServletRequest req)
+			throws WebTvUserParameterMissingException, IllegalArgumentException, IllegalAccessException {
+		WebTvUserParameter ann = f.getAnnotation(WebTvUserParameter.class);
 		if (null == ann) {
 			return;
 		}
@@ -106,7 +102,7 @@ public class WebTvCore {
 			}
 		}
 		if (null == v && ann.require()) {
-			WebTvParameterMissingException e = new WebTvParameterMissingException();
+			WebTvUserParameterMissingException e = new WebTvUserParameterMissingException();
 			e.setParam(getName(ann, f), ann.description());
 			throw e;
 		}
@@ -125,14 +121,14 @@ public class WebTvCore {
 	 *             非法访问权限异常
 	 * @since 1.1
 	 */
-	public String handleUrlParam(WebTvParam param) throws IllegalArgumentException, IllegalAccessException {
+	public String handleUrlParam(WebTvUserParam param) throws IllegalArgumentException, IllegalAccessException {
 		StringBuilder sb = new StringBuilder();
-		Class<WebTvParam> cls = WebTvParam.class;
+		Class<WebTvUserParam> cls = WebTvUserParam.class;
 		Field[] fields = cls.getDeclaredFields();
-		WebTvParameter ann = null;
+		WebTvUserParameter ann = null;
 		Object value = null;
 		for (Field f : fields) {
-			ann = f.getAnnotation(WebTvParameter.class);
+			ann = f.getAnnotation(WebTvUserParameter.class);
 			if (null == ann) {
 				continue;
 			}
@@ -158,14 +154,15 @@ public class WebTvCore {
 	 * @param req
 	 *            HttpServletRequest对象
 	 * @return 机顶盒类型枚举对象
-	 * @throws WebTvParameterIllegalException
+	 * @throws WebTvUserParameterIllegalException
 	 *             必要的参数非法异常
 	 * @since 1.1
 	 */
-	public StbType handleStbType(WebTvParam param, HttpServletRequest req) throws WebTvParameterIllegalException {
+	public StbType handleStbType(WebTvUserParam param, HttpServletRequest req)
+			throws WebTvUserParameterIllegalException {
 		StbType type = StbType.fromValue(param.getStbType());
 		if (null == type) {
-			WebTvParameterIllegalException e = new WebTvParameterIllegalException();
+			WebTvUserParameterIllegalException e = new WebTvUserParameterIllegalException();
 			e.setParam("stbType", "机顶盒类型");
 			throw e;
 		}
@@ -192,7 +189,7 @@ public class WebTvCore {
 	 * @return 参数名
 	 * @since 1.1
 	 */
-	private String getName(WebTvParameter ann, Field f) {
+	private String getName(WebTvUserParameter ann, Field f) {
 		String name = ann.name()[0];
 		if ("".equals(name)) {
 			name = f.getName();
@@ -200,32 +197,4 @@ public class WebTvCore {
 		return name;
 	}
 
-	/**
-	 * 处理机顶盒展示要求的时间格式
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param req
-	 *            HttpServletRequest对象
-	 * @since 1.0
-	 */
-	public void handleWebTvTime(HttpServletRequest req) {
-		WebTvParam param = (WebTvParam) req.getAttribute(WebTvParam.ATTR_NAME);
-		StringBuilder sb = new StringBuilder();
-		Calendar c = Calendar.getInstance();
-		for (int i : CALENDAR_ARR) {
-			sb.append("|");
-			if (i == Calendar.MONTH) {
-				sb.append(c.get(i) + 1);
-			} else if (i == Calendar.DAY_OF_WEEK) {
-				if (1 == c.get(i)) {
-					sb.append("7");
-				} else {
-					sb.append(c.get(i) - 1);
-				}
-			} else {
-				sb.append(c.get(i));
-			}
-		}
-		param.setTime(sb.substring(1));
-	}
 }
