@@ -197,12 +197,12 @@ applicationScope指定范围可以省略。<br>
 
 	<html>
 		<body>
-			${applicationScope.name}
-			${applicationScope.env}
-			${applicationScope.version}
-			${applicationScope.ip}
-			${applicationScope.port}
-			${applicationScope.contextPath}
+			${project.name}
+			${project.env}
+			${project.version}
+			${project.ip}
+			${project.port}
+			${project.contextPath}
 			${ctx}
 		</body>
 	</html>

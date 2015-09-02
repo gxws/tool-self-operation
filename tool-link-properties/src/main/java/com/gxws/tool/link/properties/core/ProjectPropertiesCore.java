@@ -47,7 +47,6 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 		pc = projectConstant;
 		sc = servletContext;
 		readPropertiesProperties();
-		sc.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
 	}
 
 	/**
@@ -108,8 +107,10 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	@Override
 	public void servletContextProperties(ServletContext servletContext) {
 		if (null != servletContext) {
-			pc.getAll().entrySet().forEach(en -> servletContext.setAttribute(en.getKey(), en.getValue()));
+			// pc.getAll().entrySet().forEach(en ->
+			// servletContext.setAttribute(en.getKey(), en.getValue()));
 			// servletContext.setAttribute("project", pc);
+			sc.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
 			servletContext.setAttribute("ctx", pc.getContextPath());
 		}
 	}
