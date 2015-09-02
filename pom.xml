@@ -43,6 +43,7 @@
 		<!-- servlet -->
 		<version.servlet>3.1.0</version.servlet>
 		<version.servlet.jstl>1.2</version.servlet.jstl>
+		<version.servlet.jsp>2.2</version.servlet.jsp>
 
 		<!-- logging -->
 		<version.slf4j>1.7.12</version.slf4j>
@@ -97,8 +98,14 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
 				<version>${version.servlet.jstl}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>${version.servlet.jsp}</version>
 				<scope>provided</scope>
 			</dependency>
+
 
 			<!-- spring -->
 			<dependency>
