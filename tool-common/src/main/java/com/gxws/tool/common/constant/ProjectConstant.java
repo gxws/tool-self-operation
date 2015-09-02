@@ -20,7 +20,7 @@ public class ProjectConstant {
 	// public final static Set<String> onlineEnvSet = new HashSet<String>(
 	// Arrays.asList(new String[] { "dev", "test", "real" }));
 
-	public static final String CONTEXT_NAME = "PROJECT_CONSTANT";
+	public static final String CONTEXT_NAME = "project";
 
 	private String name = "name_default";// 项目名
 
