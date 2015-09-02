@@ -9,7 +9,6 @@
 
 ### 2.1.0
 修改springframework版本为4.2.0<br>
-修改jstl引入范围指定。<br>
 添加jsp-api依赖。<br>
 
 # 2.说明
