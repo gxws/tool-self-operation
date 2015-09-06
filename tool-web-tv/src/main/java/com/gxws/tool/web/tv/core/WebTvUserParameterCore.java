@@ -42,7 +42,7 @@ public class WebTvUserParameterCore {
 	 *             不支持的编码格式异常
 	 * @since 1.1
 	 */
-	public WebTvUserParam handleRequest(HttpServletRequest req)
+	public WebTvUserParam handleWebTvUserParam(HttpServletRequest req)
 			throws WebTvUserParameterMissingException, IllegalArgumentException, IllegalAccessException,
 			WebTvUserParameterIllegalException, UnsupportedEncodingException {
 		WebTvUserParam param = new WebTvUserParam();
