@@ -24,3 +24,12 @@
 修改jsp使用el获取url参数的参数名，参数名修改为WebTvParam.URL_PARAM_NAME，调用方式为${webTv.url}。<br>
 修改将HttpServletRequest设置attr参数的操作，转移到core对象进行。<br>
 
+### 2.0.0
+修改maven结构。<br>
+
+### 2.1.0
+添加电视页面访问数据采集的功能。<br>
+添加处理页面数据采集参数的处理。<br>
+
+
+
