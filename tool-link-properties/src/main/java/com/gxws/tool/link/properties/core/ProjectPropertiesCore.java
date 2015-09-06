@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -98,6 +99,9 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	public void servletContextProperties(ServletContext servletContext) {
 		if (null != servletContext) {
 			servletContext.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
+			for (Entry<String, String> en : pc.getAll().entrySet()) {
+				servletContext.setAttribute(en.getKey(), en.getValue());
+			}
 			servletContext.setAttribute("ctx", pc.getContextPath());
 		}
 	}
