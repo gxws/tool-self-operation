@@ -24,9 +24,6 @@ public class WebTvInterceptor implements HandlerInterceptor {
 
 	private WebTvNowTimeCore tCore = new WebTvNowTimeCore();
 
-	// 收集用户信息url
-	private String webTvCollectUrl;
-
 	/**
 	 * @see org.springframework.web.servlet.HandlerInterceptor#preHandle(javax.servlet.http.HttpServletRequest,
 	 *      javax.servlet.http.HttpServletResponse, java.lang.Object)
@@ -34,8 +31,8 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// 处理参数
-		pCore.handleRequest(request);
+		// 处理webtv用户传入的相关参数
+		pCore.handleWebTvUserParam(request);
 		return true;
 	}
 
@@ -48,9 +45,9 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// 处理时间
-//		pCore.handleWebTvTime(request);
 		tCore.handleWebTvTime(request);
-		cCore.handleColletionUrl(request, webTvCollectUrl);
+		// 处理数据收集的参数
+		cCore.handleColletionParam(request);
 	}
 
 	/**
@@ -61,14 +58,6 @@ public class WebTvInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-	}
-
-	public String getWebTvCollectUrl() {
-		return webTvCollectUrl;
-	}
-
-	public void setWebTvCollectUrl(String webTvCollectUrl) {
-		this.webTvCollectUrl = webTvCollectUrl;
 	}
 
 }
