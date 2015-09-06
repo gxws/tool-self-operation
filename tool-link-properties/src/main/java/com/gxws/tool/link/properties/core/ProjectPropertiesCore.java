@@ -61,7 +61,7 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	 */
 	private void readPropertiesProperties() {
 		pc.setEnv(System.getProperty(ProjectConstant.NAME_PROJECT_ENV));
-		if (null != sc) {
+		if (null != sc) {// web项目
 			Properties p = new Properties();
 			InputStream is;
 			try {
@@ -73,6 +73,8 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 				log.error(e.getMessage(), e);
 			}
 			pc.setContextPath(sc.getContextPath());
+		} else {// 非web项目
+
 		}
 		pc.setIp(ips());
 		pc.setPort(System.getProperty(ProjectConstant.NAME_PROJECT_PORT));
@@ -80,18 +82,6 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 			log.debug("项目全局变量加载 " + en.getKey() + " = " + en.getValue());
 		}
 	}
-
-	// /**
-	// * 获取项目全局变量参数
-	// *
-	// * @author zhuwl120820@gxwsxx.com
-	// * @return 项目全局变量
-	// *
-	// * @since 1.1
-	// */
-	// public ProjectConstant getProjectConstant() {
-	// return pc;
-	// }
 
 	/**
 	 * @see com.gxws.tool.link.properties.core.IPropertiesCore#springProperties(java.util.Properties)
@@ -107,10 +97,7 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	@Override
 	public void servletContextProperties(ServletContext servletContext) {
 		if (null != servletContext) {
-			// pc.getAll().entrySet().forEach(en ->
-			// servletContext.setAttribute(en.getKey(), en.getValue()));
-			// servletContext.setAttribute("project", pc);
-			sc.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
+			servletContext.setAttribute(ProjectConstant.CONTEXT_NAME, pc);
 			servletContext.setAttribute("ctx", pc.getContextPath());
 		}
 	}
