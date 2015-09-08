@@ -38,9 +38,12 @@ public class ValidateCore {
 	 * @since 1.0
 	 */
 	public void validate(Object[] os, String methodName, Class<?> targetClass) throws BoParamValidateException {
-		log.debug("验证输入参数");
+		log.debug("验证输入参数 = " + targetClass.getName() + "." + methodName);
 		StringBuffer sb = new StringBuffer();
 		for (Object o : os) {
+			if (null == o) {
+				continue;
+			}
 			Class<?> oClass = (Class<?>) o.getClass();
 			Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 			Set<?> cv = validator.validate(oClass.cast(o), group(methodName, targetClass));
