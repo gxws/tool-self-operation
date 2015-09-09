@@ -10,6 +10,7 @@
 ### 2.1.0
 修改springframework版本为4.2.0<br>
 添加jsp-api依赖。<br>
+修改hibernate validator版本为5.2.1<br>
 
 # 2.说明
 ### 2.1 tool-common
