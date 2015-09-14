@@ -56,7 +56,7 @@
 		<version.testng>6.9.6</version.testng>
 
 		<!-- rpc -->
-		<!-- <version.dubbo>2.4.10</version.dubbo> -->
+		<version.dubbo>2.4.10</version.dubbo>
 
 		<!-- json -->
 		<version.fastjson>1.2.6</version.fastjson>
@@ -182,10 +182,18 @@
 			</dependency>
 
 			<!-- dubbo -->
-			<!-- <dependency> <groupId>com.alibaba</groupId> <artifactId>dubbo</artifactId> 
-				<version>${version.dubbo}</version> <scope>provided</scope> <exclusions> 
-				<exclusion> <groupId>org.springframework</groupId> <artifactId>spring</artifactId> 
-				</exclusion> </exclusions> </dependency> -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${version.dubbo}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 
 			<!-- mysql db -->
 			<dependency>
