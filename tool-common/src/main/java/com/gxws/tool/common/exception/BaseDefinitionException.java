@@ -13,9 +13,9 @@ public class BaseDefinitionException extends Exception {
 
 	private static final long serialVersionUID = 6045066284191405667L;
 
-	private String message;
+	protected String message;
 
-	private String code = "undefind";
+	protected String code = "undefind";
 
 	public String getMessage() {
 		return "[exception code = " + code + "]" + message;
