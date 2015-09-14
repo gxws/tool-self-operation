@@ -39,6 +39,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
