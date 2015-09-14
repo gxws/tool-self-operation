@@ -5,7 +5,9 @@ package com.gxws.tool.common.exception;
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.2
+ * @deprecated 使用 com.gxws.tool.definition.exception.BaseDefinitionException 代替
  */
+@Deprecated
 public class BaseException extends Exception {
 	private static final long serialVersionUID = 4399238246364390381L;
 	private String id = "";

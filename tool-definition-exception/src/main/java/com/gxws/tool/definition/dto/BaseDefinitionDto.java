@@ -1,22 +1,17 @@
-package com.gxws.tool.common.data.dto;
+package com.gxws.tool.definition.dto;
 
 import java.io.Serializable;
 import java.util.Map;
 
-import com.gxws.tool.common.exception.BaseException;
+import com.gxws.tool.definition.exception.BaseDefinitionException;
 
 /**
- * base data transfer object 基础数据传输对象<br>
- * 用于远程调用数据传输对象都需要继承该类<br>
- * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.0
- * @deprecated 使用 com.gxws.tool.definition.dto.BaseDefinitionDto 代替
  */
-@Deprecated
-public class BaseDto implements Serializable {
+public class BaseDefinitionDto implements Serializable {
 
-	private static final long serialVersionUID = 7414747570827931208L;
+	private static final long serialVersionUID = -2854339862355132090L;
 
 	// 提供日志信息
 	private Map<String, String> requestMap;
@@ -27,8 +22,17 @@ public class BaseDto implements Serializable {
 	// 远程调用是否异常
 	private boolean hasException = false;
 
-	// 异常对象
-	private BaseException exception;
+	// 预定义异常对象
+	private BaseDefinitionException exception;
+
+	public void setException(BaseDefinitionException exception) {
+		this.hasException = true;
+		this.exception = exception;
+	}
+
+	public BaseDefinitionException getException() {
+		return exception;
+	}
 
 	public Map<String, String> getRequestMap() {
 		return requestMap;
@@ -48,15 +52,6 @@ public class BaseDto implements Serializable {
 
 	public boolean hasException() {
 		return hasException;
-	}
-
-	public BaseException getException() {
-		return exception;
-	}
-
-	public void setException(BaseException exception) {
-		this.hasException = true;
-		this.exception = exception;
 	}
 
 }

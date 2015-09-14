@@ -23,8 +23,7 @@ public class BaseDefinitionExceptionFactory implements ApplicationContextAware {
 		this.ac = applicationContext;
 	}
 
-	public BaseDefinitionException instance(Class<? extends BaseDefinitionException> cls) {
-		return ac.getBean(cls);
+	public <T extends BaseDefinitionException> T instance(Class<? extends BaseDefinitionException> cls) {
+		return (T) ac.getBean(cls);
 	}
-
 }

@@ -16,16 +16,38 @@ public class BaseDefinitionException extends Exception {
 
 	private static final long serialVersionUID = 6045066284191405667L;
 
-	protected String message;
+	private static final String PRE = "[";
+
+	private static final String SUF = "]";
+
+	private static final String SEP = ":";
+
+	protected StringBuilder message;
 
 	protected String name = "undefind";
 
 	public void appendMessage(String message) {
-		this.message = this.message + "[" + message + "]";
+		this.message.append(PRE + message + SUF);
+	}
+
+	protected void appendMessageKey(String key) {
+		this.message.append(PRE + message);
+	}
+
+	protected void appendMessageValue(String value) {
+		this.message.append(SEP + message + SUF);
+	}
+
+	protected void appendMessage(String key, String value) {
+		this.message.append(PRE + key + SEP + value + SUF);
 	}
 
 	public String getMessage() {
-		return "[异常:" + this.name + "]" + this.message;
+		return PRE + "异常 " + SEP + this.name + SUF + this.message.toString();
+	}
+
+	public String toString() {
+		return getMessage();
 	}
 
 }
