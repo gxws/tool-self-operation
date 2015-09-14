@@ -13,6 +13,7 @@
 		<module>tool-validator</module>
 		<module>tool-test</module>
 		<module>tool-mybatis</module>
+		<module>tool-definition-exception</module>
 	</modules>
 
 	<description>tool kit for the java development team which names "Self Operation"</description>
@@ -113,6 +114,11 @@
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
 				<version>${version.aspectjweaver}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${version.springframework}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
