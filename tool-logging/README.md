@@ -42,11 +42,11 @@ mail list:朱伟亮 \<zhuwl120820@gxwsxx.com>
 ### 1.收集，收集信息包括：
 http访问请求请求信息、参数名和值<br>
 
-	com.gxws.tool.logging.spring.interceptor.WebLoggingInterceptor
+	com.gxws.tool.logging.spring.web.mvc.interceptor.WebLoggingInterceptor
 SOA接收参数和返回结果<br>
 
-	com.gxws.tool.logging.spring.interceptor.DubboConsumerLoggingInterceptor
-	com.gxws.tool.logging.spring.interceptor.DubboProviderLoggingInterceptor
+	com.gxws.tool.logging.spring.rpc.interceptor.DubboConsumerLoggingInterceptor
+	com.gxws.tool.logging.spring.rpc.interceptor.DubboProviderLoggingInterceptor
 spring bean的public方法接收的参数和返回结果<br>
 
 	com.gxws.tool.logging.spring.aspect.BeanLoggingAspect
@@ -82,9 +82,17 @@ com.alibaba fastjson 1.2<br>
 	</dependency>
 
 ### 引入spring配置
-在spring.xml文件中加入
+包含记录spring aspect日志功能的，在spring.xml文件中加入
 
-	<import resource="spring-logging-default.xml" />
+	<import resource="spring-logging.xml" />
+
+包含记录spring web mvc日志功能的，	在spring.xml文件中加入
+
+	<import resource="spring-logging-web-mvc.xml" />
+	
+包含记录spring rpc dubbo日志功能的，在spring.xml文件中加入
+
+	<import resource="spring-logging-rpc-dubbo.xml" />
 	
 使用组件
 ---
