@@ -13,7 +13,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean
-				class="com.gxws.tool.logging.spring.interceptor.WebLoggingInterceptor" />
+				class="com.gxws.tool.logging.spring.web.mvc.interceptor.WebLoggingInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

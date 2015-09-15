@@ -1,17 +1,17 @@
-package com.gxws.tool.definition.exception;
+package com.gxws.tool.common.exception;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * BaseDefinitionExceptionFactory类需要定义为spring bean。<br>
- * 使用方式，业务对象需要注入BaseDefinitionExceptionFactory对象。<br>
+ * BaseExceptionFactory类需要定义为spring bean。<br>
+ * 使用方式，业务对象需要注入BaseExceptionFactory对象。<br>
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 2.1
  */
-public class BaseDefinitionExceptionFactory implements ApplicationContextAware {
+public class BaseExceptionFactory implements ApplicationContextAware {
 
 	private ApplicationContext ac;
 
@@ -23,7 +23,7 @@ public class BaseDefinitionExceptionFactory implements ApplicationContextAware {
 		this.ac = applicationContext;
 	}
 
-	public <T extends BaseDefinitionException> T instance(Class<? extends BaseDefinitionException> cls) {
+	public <T extends BaseException> T instance(Class<? extends BaseException> cls) {
 		return (T) ac.getBean(cls);
 	}
 }

@@ -13,7 +13,6 @@
 		<module>tool-validator</module>
 		<module>tool-test</module>
 		<module>tool-mybatis</module>
-		<module>tool-definition-exception</module>
 	</modules>
 
 	<description>tool kit for the java development team which names "Self Operation"</description>

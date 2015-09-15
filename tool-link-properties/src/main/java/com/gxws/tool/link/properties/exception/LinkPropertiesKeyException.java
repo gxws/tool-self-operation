@@ -17,6 +17,6 @@ public class LinkPropertiesKeyException extends LinkPropertiesBaseException {
 	 * @since 1.1
 	 */
 	public LinkPropertiesKeyException() {
-		this.setMsg("配置信息属性名异常。");
+		setName("配置信息属性名异常。");
 	}
 }

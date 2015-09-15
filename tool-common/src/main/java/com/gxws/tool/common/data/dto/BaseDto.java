@@ -11,9 +11,7 @@ import com.gxws.tool.common.exception.BaseException;
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.0
- * @deprecated 使用 com.gxws.tool.definition.dto.BaseDefinitionDto 代替
  */
-@Deprecated
 public class BaseDto implements Serializable {
 
 	private static final long serialVersionUID = 7414747570827931208L;

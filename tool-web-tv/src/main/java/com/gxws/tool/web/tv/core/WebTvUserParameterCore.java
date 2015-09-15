@@ -103,7 +103,9 @@ public class WebTvUserParameterCore {
 		}
 		if (null == v && ann.require()) {
 			WebTvUserParameterMissingException e = new WebTvUserParameterMissingException();
-			e.setParam(getName(ann, f), ann.description());
+//			e.setParam(getName(ann, f), ann.description());
+			e.setParamName(getName(ann, f));
+			e.setParamDescription(ann.description());
 			throw e;
 		}
 	}
@@ -163,7 +165,9 @@ public class WebTvUserParameterCore {
 		StbType type = StbType.fromValue(param.getStbType());
 		if (null == type) {
 			WebTvUserParameterIllegalException e = new WebTvUserParameterIllegalException();
-			e.setParam("stbType", "机顶盒类型");
+			// e.setParam("stbType", "机顶盒类型");
+			e.setParamName("stbType");
+			e.setParamDescription("机顶盒类型");
 			throw e;
 		}
 		if (StbType.THREE.equals(type)) {

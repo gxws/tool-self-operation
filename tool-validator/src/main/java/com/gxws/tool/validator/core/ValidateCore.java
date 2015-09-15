@@ -61,7 +61,7 @@ public class ValidateCore {
 		}
 		if (sb.length() > 0) {
 			BoParamValidateException e = new BoParamValidateException();
-			e.setMsg(sb.toString());
+			e.appendMessage(sb.toString());
 			throw e;
 		}
 	}

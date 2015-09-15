@@ -1,99 +1,59 @@
 package com.gxws.tool.common.exception;
 
 /**
- * 异常
+ * 基础定义异常，用于替代BaseException<br>
+ * 重写{@link Exception}的getMessage()方法。<br>
+ * 将BaseException对象和其子类对象定义为spring bean。<br>
+ * 使用{@link BaseExceptionFactory}
+ * 的get()方法获取具体的BaseException类或其子类对象。<br>
+ * 
+ * @see java.lang.Exception
  * 
  * @author zhuwl120820@gxwsxx.com
  * @since 1.2
- * @deprecated 使用 com.gxws.tool.definition.exception.BaseDefinitionException 代替
  */
-@Deprecated
 public class BaseException extends Exception {
-	private static final long serialVersionUID = 4399238246364390381L;
-	private String id = "";
-	private String code = "";
-	private String value = "";
-	private String name = "";
-	private String type = "";
-	private String msg = "";
-	private String reason = "";
+	private static final long serialVersionUID = -1266653452134423857L;
 
-	/**
-	 * 覆盖Exception中的getMessage方法，返回或获取异常对象的提示信息
-	 * 
-	 * @see java.lang.Throwable#getMessage()
-	 * @since 1.3
-	 */
-	@Override
+	private static final String PRE = "[";
+
+	private static final String SUF = "]";
+
+	private static final String SEP = ":";
+
+	protected StringBuilder message;
+
+	private String name = "undefind";
+
+	public void appendMessage(String message) {
+		this.message.append(PRE + message + SUF);
+	}
+
+	protected void appendMessageKey(String key) {
+		this.message.append(PRE + message);
+	}
+
+	protected void appendMessageValue(String value) {
+		this.message.append(SEP + message + SUF);
+	}
+
+	protected void appendMessage(String key, String value) {
+		this.message.append(PRE + key + SEP + value + SUF);
+	}
+
 	public String getMessage() {
-		return this.getMsg();
+		return PRE + "异常 " + SEP + this.name + SUF + this.message.toString();
 	}
 
-	/**
-	 * 添加需要调试的异常提示信息
-	 * 
-	 * @author zhuwl120820@gxwsxx.com
-	 * @param msg
-	 *            提示信息
-	 * @since 1.3
-	 */
-	public void appendMsg(String msg) {
-		this.setMsg(this.getMsg() + "。" + msg);
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
+	public String toString() {
+		return getMessage();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
 	}
 }

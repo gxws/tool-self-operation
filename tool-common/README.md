@@ -27,7 +27,8 @@ tool-common
 ### 2.1.0
 修改ProjectConstant的数据存储方式，由静态单例模式，修改为以对象方式存储于spring context和servlet context中。<br>
 去除ProjectConstant类的onlineEnvSet静态属性，不再提供制定线上环境的变量。<br>
-添加新的异常基类BaseDefinitionException。<br>
+添加spring-context依赖。<br>
+对BaseException类进行调整。<br>
 
 ## 结构
 ### 包

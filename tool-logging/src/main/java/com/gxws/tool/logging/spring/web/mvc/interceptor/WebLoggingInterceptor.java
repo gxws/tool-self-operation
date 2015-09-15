@@ -1,4 +1,4 @@
-package com.gxws.tool.logging.spring.interceptor;
+package com.gxws.tool.logging.spring.web.mvc.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
