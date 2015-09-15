@@ -27,6 +27,9 @@ public class DubboConsumerLoggingInterceptor implements Filter {
 
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+		String interfaceName = invocation.getAttachment("interface");
+		String methodName = invocation.getMethodName();
+		log.debug(LoggingMarkerConstant.DUBBO_FILTER_MARKER, "发送dubbo rpc请求" + interfaceName + "." + methodName);
 		Object[] os = invocation.getArguments();
 		Map<String, String> map = new HashMap<>();
 		map.putAll(ThreadContext.getContext());
@@ -35,7 +38,6 @@ public class DubboConsumerLoggingInterceptor implements Filter {
 				((BaseDto) o).setRequestMap(map);
 			}
 		}
-		log.debug(LoggingMarkerConstant.DUBBO_FILTER_MARKER, "发送dubbo rpc请求");
 		return invoker.invoke(invocation);
 	}
 
