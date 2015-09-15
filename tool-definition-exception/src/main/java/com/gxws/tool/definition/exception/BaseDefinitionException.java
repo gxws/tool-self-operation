@@ -24,7 +24,7 @@ public class BaseDefinitionException extends Exception {
 
 	protected StringBuilder message;
 
-	protected String name = "undefind";
+	private String name = "undefind";
 
 	public void appendMessage(String message) {
 		this.message.append(PRE + message + SUF);
@@ -48,6 +48,14 @@ public class BaseDefinitionException extends Exception {
 
 	public String toString() {
 		return getMessage();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	protected void setName(String name) {
+		this.name = name;
 	}
 
 }
