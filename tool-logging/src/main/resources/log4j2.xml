@@ -8,26 +8,34 @@
 		<Property name="pIp">${web:attr.project.ip}</Property>
 		<Property name="pPort">${web:attr.project.port}</Property>
 		<!-- 日志格式 -->
-		<!-- [时间]#[项目信息]#[等级]#[类全名.方法名.行数]#[线程名]#ThreadContextStack#[ThreadContextMap]#信息 -->
-		<Property name="formate">
-			%d{DEFAULT} # ${pEnv} # ${pName} # ${pVersion} # ${pIp} # ${pPort} # %p{length=5} # %c # %M # %L # %t # %x # %X #%m%n
+		<!-- [时间]#[项目信息]#[日志等级]#[类全名.方法名.行数]#[线程名]#ThreadContextStack#[ThreadContextMap]#信息 -->
+		<Property name="formateAll">
+			%d{DEFAULT} # ${pEnv} # ${pName} # ${pVersion} # ${pIp} # ${pPort} # %p{length=5} # %c.%M # %L # %t # %x # %X #%m%n
 		</Property>
+		<!-- [时间]#[项目名称]#[日志等级]#[类全名.方法名.行数]#[线程名]#ThreadContextStack#[ThreadContextMap]#信息 -->
+		<Property name="formateConsole">
+			%d{DEFAULT} # ${pName} # %p{length=5} # %c.%M # %L # %t # %x # %X #%m%n
+		</Property>
+		<!-- [时间]#[日志等级]#[类全名.方法名.行数]#[线程名]#ThreadContextStack#[ThreadContextMap]#信息 -->
+		<Property name="formateFile">
+			%d{DEFAULT} # %p{length=5} # %c.%M # %L # %t # %x # %X #%m%n
+		</Property>
+
 	</Properties>
 	<Appenders>
 		<Console name="consoleAppender" target="SYSTEM_OUT">
-			<PatternLayout pattern="${formate}" />
+			<PatternLayout pattern="${formateConsole}" />
 		</Console>
 		<RollingFile name="rollingFileAppender" fileName="../logs/${web:servletContextName}.log"
 			filePattern="../logs/$${date:yyyy-MM}/${web:servletContextName}-%d{MM-dd-yyyy}-%i.log.gz">
-			<PatternLayout pattern="${formate}" />
+			<PatternLayout pattern="${formateFile}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 				<SizeBasedTriggeringPolicy size="250 MB" />
 			</Policies>
 		</RollingFile>
-		<!-- <NoSqlAppender name="nosqlAppender">
-			<MongoDbProvider env="${pEnv}" />
-		</NoSqlAppender> -->
+		<!-- <NoSqlAppender name="nosqlAppender"> <MongoDbProvider env="${pEnv}" 
+			/> </NoSqlAppender> -->
 	</Appenders>
 
 	<Loggers>
