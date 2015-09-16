@@ -27,7 +27,7 @@
 			<PatternLayout pattern="${formateConsole}" />
 		</Console>
 		<RollingFile name="rollingFileAppender" fileName="../logs/${web:servletContextName}.log"
-			filePattern="../logs/$${date:yyyy-MM}/${web:servletContextName}-%d{MM-dd-yyyy}-%i.log.gz">
+			filePattern="../logs/$${date:yyyy-MM}/${web:servletContextName}-%d{MM-dd-yyyy}-%i.log">
 			<PatternLayout pattern="${formateFile}" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
