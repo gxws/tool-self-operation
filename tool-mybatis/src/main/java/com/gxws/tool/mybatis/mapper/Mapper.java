@@ -27,6 +27,16 @@ public interface Mapper<T> {
 	public T select(String id);
 
 	/**
+	 * selectAll语句，查询表所有数据
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @return 查询数据表的全部对象
+	 * @since 2.1
+	 */
+	@SelectProvider(method = "fakeSQL", type = MapperProvider.class)
+	public T selectAll();
+
+	/**
 	 * 获取对应表的noid值，由insert或insert*方法自动调用，不需要显式调用
 	 * 
 	 * @author zhuwl120820@gxwsxx.com

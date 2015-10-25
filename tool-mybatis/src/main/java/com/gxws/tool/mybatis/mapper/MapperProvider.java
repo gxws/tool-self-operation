@@ -163,6 +163,27 @@ public class MapperProvider {
 	}
 
 	/**
+	 * Mapper接口selectAll方法的具体实现
+	 * 
+	 * @author zhuwl120820@gxwsxx.com
+	 * @param ms
+	 *            MappedStatement 对象
+	 * @param en
+	 *            Entity 对象
+	 * @since 2.1
+	 */
+	public void selectAll(MappedStatement ms, Entity en) {
+		List<SqlNode> nodes = new ArrayList<>();
+		BEGIN();
+		SELECT(en.getDbColumnNameString());
+		FROM(en.getDbTableName());
+		nodes.add(new StaticTextSqlNode(SQL()));
+		DynamicSqlSource sqlSource = new DynamicSqlSource(ms.getConfiguration(), new MixedSqlNode(nodes));
+		resetValue(ms, "sqlSource", sqlSource);
+		resetValue(ms.getResultMaps().get(0), "type", en.getEntityClass());
+	}
+
+	/**
 	 * Mapper接口noid方法的具体实现
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
