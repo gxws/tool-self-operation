@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -153,7 +152,14 @@ public class ProjectPropertiesCore implements IPropertiesCore {
 	private File mavenPropertiesPath() {
 		File f = new File(sc.getRealPath("/") + "META-INF/maven");
 		f = f.listFiles()[0].listFiles()[0];
-		f = f.listFiles((dir, name) -> ("pom.properties".equals(name) ? true : false))[0];
+		// f = f.listFiles((dir, name) -> ("pom.properties".equals(name) ? true
+		// : false))[0];
+		for (File file : f.listFiles()) {
+			if ("pom.properties".equals(file.getName())) {
+				f = file;
+				break;
+			}
+		}
 		log.debug("读取项目maven信息的路径 " + f.getAbsolutePath());
 		return f;
 	}

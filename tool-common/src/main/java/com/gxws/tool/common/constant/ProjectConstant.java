@@ -82,6 +82,7 @@ public class ProjectConstant {
 	 */
 	public Map<String, String> getAll() {
 		return new HashMap<String, String>() {
+			private static final long serialVersionUID = 9112890344243924405L;
 			{
 				put(NAME_PROJECT_NAME, name);
 				put(NAME_PROJECT_ENV, env);
