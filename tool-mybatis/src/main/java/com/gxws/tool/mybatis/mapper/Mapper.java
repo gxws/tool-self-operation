@@ -1,5 +1,7 @@
 package com.gxws.tool.mybatis.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -34,7 +36,7 @@ public interface Mapper<T> {
 	 * @since 2.1
 	 */
 	@SelectProvider(method = "fakeSQL", type = MapperProvider.class)
-	public T selectAll();
+	public List<T> selectAll();
 
 	/**
 	 * 获取对应表的noid值，由insert或insert*方法自动调用，不需要显式调用
