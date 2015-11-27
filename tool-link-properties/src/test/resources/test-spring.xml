@@ -5,19 +5,18 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<context:component-scan base-package="com.gxws.tool.link.properties" />
+
 	<!-- 读取配置 -->
 	<bean class="com.gxws.tool.link.properties.spring.LinkPropertiesBean">
+		<property name="linkPropertiesReadCore" ref="linkPropertiesReadCore" />
+		<property name="linkPropertiesWriteCore" ref="linkPropertiesWriteCore" />
+		<property name="projectInfo" ref="projectInfo" />
 		<property name="constantClassnames">
 			<list>
-				<value>com.gxws.tool.link.properties.core.test.Constant</value>
+				<value>com.gxws.tool.link.properties.test.Constant</value>
 			</list>
 		</property>
-	</bean>
-	<!-- 值获取测试 -->
-	<bean class="com.gxws.tool.link.properties.core.test.SpringPropertyTestBean">
-		<property name="property1" value="${p1}" />
-		<property name="property2" value="${p2}" />
-		<property name="property3" value="${p3}" />
 	</bean>
 
 </beans>

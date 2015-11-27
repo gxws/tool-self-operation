@@ -7,7 +7,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.gxws.tool.web.tv.interceptor.WebTvInterceptor" />
+			<bean class="com.gxwsxx.tool.web.tv.interceptor.WebTvInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

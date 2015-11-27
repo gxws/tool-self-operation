@@ -14,9 +14,11 @@
 修改hibernate validator版本为5.2.1<br>
 重新引入dubbo依赖，版本为2.4.10<br>
 
-# 2.说明
-### 2.1 tool-common
-用于tool所有模块公用的部分，包括静态变量，常用方法等。<br>
-
-### 2.2 tool-link-properties
-用于读取项目“全局变量”和“自定义变量”。
+### 3.0.0
+添加rpc模块tool-rpc。<br>
+添加工具模块tool-utils。<br>
+去除tool-validator模块，相应的验证功能并入tool-rpc。<br>
+去除tool-logging大部分功能，相应的参数日志记录功能并入tool-rpc。<br>
+去除tool-test模块，还没有设计好测试的方式。<br>
+去除tool-common模块，将相应的功能并入tool-link-properties和tool-utils中。<br>
+修改com.gxws为com.gxwsxx

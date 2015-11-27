@@ -7,8 +7,8 @@ import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gxws.tool.common.uuid.Uuid;
 import com.gxws.tool.mybatis.entity.PkField;
+import com.gxws.tool.mybatis.util.Uuid;
 
 /**
  * 设置主键的值

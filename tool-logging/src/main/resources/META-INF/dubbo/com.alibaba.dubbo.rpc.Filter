@@ -1,2 +1,0 @@
-dubboProviderLoggingInterceptor=com.gxws.tool.logging.spring.rpc.interceptor.DubboProviderLoggingInterceptor
-dubboConsumerLoggingInterceptor=com.gxws.tool.logging.spring.rpc.interceptor.DubboConsumerLoggingInterceptor

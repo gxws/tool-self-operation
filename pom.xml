@@ -1,17 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.gxws</groupId>
+	<groupId>com.gxwsxx</groupId>
 	<artifactId>tool-self-operation</artifactId>
-	<version>2.2.0-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>tool-common</module>
 		<module>tool-link-properties</module>
-		<module>tool-logging</module>
 		<module>tool-web-tv</module>
-		<module>tool-validator</module>
-		<module>tool-test</module>
 		<module>tool-mybatis</module>
 	</modules>
 
@@ -37,8 +33,8 @@
 	<properties>
 
 		<!-- spring -->
-		<version.springframework>4.2.0.RELEASE</version.springframework>
-		<version.aspectjweaver>1.8.2</version.aspectjweaver>
+		<version.springframework>4.2.2.RELEASE</version.springframework>
+		<version.aspectjweaver>1.8.7</version.aspectjweaver>
 
 		<!-- servlet -->
 		<version.servlet>3.1.0</version.servlet>
@@ -47,43 +43,32 @@
 
 		<!-- logging -->
 		<version.slf4j>1.7.12</version.slf4j>
-		<version.log4j>2.3</version.log4j>
+		<version.log4j>2.4.1</version.log4j>
 
 		<!-- zookeeper -->
-		<version.zookeeper.curator>2.7.1</version.zookeeper.curator>
+		<version.zookeeper>3.4.6</version.zookeeper>
 
 		<!-- test -->
-		<version.testng>6.9.6</version.testng>
-
-		<!-- rpc -->
-		<version.dubbo>2.4.10</version.dubbo>
+		<version.junit>4.12</version.junit>
 
 		<!-- json -->
-		<version.fastjson>1.2.6</version.fastjson>
+		<version.fastjson>1.2.7</version.fastjson>
 
-		<!-- mysql db -->
+		<!-- mybatis -->
 		<version.mybatis>3.3.0</version.mybatis>
-		<version.mariadb.java.client>1.1.9</version.mariadb.java.client>
 
-		<!-- mongodb -->
-		<version.mongo.java.driver>2.13.0</version.mongo.java.driver>
-		<version.spring.data.mongodb>1.6.2.RELEASE</version.spring.data.mongodb>
+		<!-- mysql -->
+		<version.mariadb.java.client>1.2.3</version.mariadb.java.client>
 
 		<!-- validator -->
-		<version.hibernate.validator>5.2.1.Final</version.hibernate.validator>
+		<version.hibernate.validator>5.2.2.Final</version.hibernate.validator>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- tool -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>tool-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>tool-logging</artifactId>
+				<artifactId>tool-link-properties</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -106,7 +91,6 @@
 				<version>${version.servlet.jsp}</version>
 				<scope>provided</scope>
 			</dependency>
-
 
 			<!-- spring -->
 			<dependency>
@@ -166,17 +150,26 @@
 
 			<!-- zookeeper -->
 			<dependency>
-				<groupId>org.apache.curator</groupId>
-				<artifactId>curator-framework</artifactId>
-				<version>${version.zookeeper.curator}</version>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>${version.zookeeper}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>log4j</artifactId>
+						<groupId>log4j</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>slf4j-log4j12</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- test -->
 			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${version.testng}</version>
-				<scope>test</scope>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
 			</dependency>
 
 			<!-- json -->
@@ -186,45 +179,19 @@
 				<version>${version.fastjson}</version>
 			</dependency>
 
-			<!-- dubbo -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>${version.dubbo}</version>
-				<scope>provided</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- mysql db -->
+			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
 				<version>${version.mybatis}</version>
 			</dependency>
+
+			<!-- mysql -->
 			<dependency>
 				<groupId>org.mariadb.jdbc</groupId>
 				<artifactId>mariadb-java-client</artifactId>
 				<version>${version.mariadb.java.client}</version>
 				<scope>test</scope>
-			</dependency>
-
-			<!-- mongodb -->
-			<dependency>
-				<groupId>org.mongodb</groupId>
-				<artifactId>mongo-java-driver</artifactId>
-				<version>${version.mongo.java.driver}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-mongodb</artifactId>
-				<version>${version.spring.data.mongodb}</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!-- validator -->

@@ -7,15 +7,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.gxws.tool.mybatis.test.mapper.TestTbMapper;
-import com.gxws.tool.mybatis.test.mapper.TestTbSubMapper;
 import com.gxws.tool.mybatis.test.tb.TestTb;
 
 /**
@@ -49,7 +46,7 @@ public class MapperProviderTest {
 		session.close();
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testInsert() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		TestTb tb = new TestTb();
@@ -58,7 +55,7 @@ public class MapperProviderTest {
 		Assert.assertEquals(mapper.insert(tb), 1);
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testInsertNotNull() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		TestTb tb = new TestTb();
@@ -67,13 +64,13 @@ public class MapperProviderTest {
 		Assert.assertEquals(mapper.insertNotNull(tb), 1);
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testSelect() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		Assert.assertEquals(mapper.select("3").getName(), "name3");
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testUpdate() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		TestTb tb = new TestTb();
@@ -84,7 +81,7 @@ public class MapperProviderTest {
 		Assert.assertEquals(mapper.update(tb), 1);
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testUpdateNotNull() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		TestTb tb = new TestTb();
@@ -96,13 +93,13 @@ public class MapperProviderTest {
 		Assert.assertEquals(mapper.updateNotNull(tb), 1);
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testDelete() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		Assert.assertEquals(mapper.delete("6"), 1);
 	}
 
-	@Test(groups = { "supMapper" })
+	@Test
 	public void testCount() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		Assert.assertEquals(mapper.count(), 4);
