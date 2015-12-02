@@ -1,4 +1,4 @@
-package com.gxws.tool.mybatis.mapper;
+package com.gxwsxx.tool.mybatis.mapper;
 
 import java.util.List;
 

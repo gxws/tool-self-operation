@@ -1,4 +1,4 @@
-package com.gxws.tool.mybatis.aspect;
+package com.gxwsxx.tool.mybatis.aspect;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -7,8 +7,8 @@ import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gxws.tool.mybatis.entity.PkField;
-import com.gxws.tool.mybatis.util.Uuid;
+import com.gxwsxx.tool.mybatis.entity.PkField;
+import com.gxwsxx.tool.mybatis.util.Uuid;
 
 /**
  * 设置主键的值

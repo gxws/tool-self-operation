@@ -9,6 +9,7 @@
 		<module>tool-link-properties</module>
 		<module>tool-web-tv</module>
 		<module>tool-mybatis</module>
+		<module>tool-exception</module>
 	</modules>
 
 	<description>tool kit for the java development team which names "Self Operation"</description>

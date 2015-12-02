@@ -1,4 +1,4 @@
-package com.gxws.tool.mybatis.util;
+package com.gxwsxx.tool.mybatis.util;
 
 import java.net.InetAddress;
 import java.util.UUID;

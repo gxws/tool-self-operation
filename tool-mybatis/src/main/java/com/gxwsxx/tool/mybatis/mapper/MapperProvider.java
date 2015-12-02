@@ -1,4 +1,4 @@
-package com.gxws.tool.mybatis.mapper;
+package com.gxwsxx.tool.mybatis.mapper;
 
 import static org.apache.ibatis.jdbc.SqlBuilder.*;
 
@@ -23,8 +23,8 @@ import org.apache.ibatis.scripting.xmltags.TrimSqlNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gxws.tool.mybatis.entity.Entity;
-import com.gxws.tool.mybatis.entity.PkField;
+import com.gxwsxx.tool.mybatis.entity.Entity;
+import com.gxwsxx.tool.mybatis.entity.PkField;
 
 /**
  * com.gxws.tool.mybatis.mapper.Mapper接口的实际实现类
