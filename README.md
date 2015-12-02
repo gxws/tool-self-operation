@@ -21,4 +21,5 @@
 去除tool-logging大部分功能，相应的参数日志记录功能并入tool-rpc。<br>
 去除tool-test模块，还没有设计好测试的方式。<br>
 去除tool-common模块，将相应的功能并入tool-link-properties和tool-utils中。<br>
-修改com.gxws为com.gxwsxx
+修改com.gxws为com.gxwsxx<br>
+添加exception模块，主要用于方便异常信息格式输出。<br>
