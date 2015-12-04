@@ -34,7 +34,7 @@
 	<properties>
 
 		<!-- spring -->
-		<version.springframework>4.2.2.RELEASE</version.springframework>
+		<version.springframework>4.2.3.RELEASE</version.springframework>
 		<version.aspectjweaver>1.8.7</version.aspectjweaver>
 
 		<!-- servlet -->
@@ -51,9 +51,6 @@
 
 		<!-- test -->
 		<version.junit>4.12</version.junit>
-
-		<!-- json -->
-		<version.fastjson>1.2.7</version.fastjson>
 
 		<!-- mybatis -->
 		<version.mybatis>3.3.0</version.mybatis>
@@ -171,13 +168,6 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit}</version>
-			</dependency>
-
-			<!-- json -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>${version.fastjson}</version>
 			</dependency>
 
 			<!-- mybatis -->

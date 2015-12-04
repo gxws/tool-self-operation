@@ -32,7 +32,7 @@ public class Exception extends java.lang.Exception {
 		if (null == msg) {
 			return ed.value();
 		} else {
-			return ed.value() + msg;
+			return ed.value() + "," + msg;
 		}
 	}
 

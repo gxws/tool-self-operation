@@ -9,6 +9,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.gxwsxx.tool.mybatis.mapper.Mapper;
+
 /**
  * 需要处理的泛型实体类信息
  * 
@@ -52,7 +54,7 @@ public class Entity {
 	// 是否调用通用方法
 	private boolean subMapper;
 
-	private final static String MAPPER_NAME = "com.gxws.tool.mybatis.mapper.Mapper";
+	private final static Class<Mapper> MAPPER_CLASS = Mapper.class;
 
 	/**
 	 * 根据方法全面创建Entity对象
@@ -94,8 +96,8 @@ public class Entity {
 			if (type instanceof ParameterizedType) {
 				pt = (ParameterizedType) type;
 				superClass = (Class<?>) pt.getRawType();
-				if (MAPPER_NAME.equals(superClass.getName())) {
-					log.debug(this.getMapperClassName() + "是" + MAPPER_NAME + "的子类");
+				if (MAPPER_CLASS.equals(superClass)) {
+					log.debug(this.getMapperClassName() + "是" + MAPPER_CLASS.getName() + "的子类");
 					return pt;
 				}
 			}
@@ -105,7 +107,7 @@ public class Entity {
 				return pt;
 			}
 		}
-		log.debug(this.getMapperClassName() + "不是" + MAPPER_NAME + "的子类");
+		log.debug(this.getMapperClassName() + "不是" + MAPPER_CLASS.getName() + "的子类");
 		return null;
 	}
 

@@ -34,7 +34,7 @@ public class LinkPropertiesFileLinkReader implements LinkPropertiesReader {
 	@Override
 	public String valueString(String key) {
 		try {
-			return linkFile.getString(System.getProperty("project.env") + "." + key);
+			return linkFile.getString(key);
 		} catch (Exception e) {
 			return null;
 		}

@@ -96,4 +96,12 @@ public class ProjectInfo {
 	public void setServletContextPath(String servletContextPath) {
 		this.servletContextPath = servletContextPath;
 	}
+
+	public String getZookeeperHosts() {
+		return zookeeperHosts;
+	}
+
+	public void setZookeeperHosts(String zookeeperHosts) {
+		this.zookeeperHosts = zookeeperHosts;
+	}
 }

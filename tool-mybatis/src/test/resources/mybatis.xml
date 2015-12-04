@@ -16,7 +16,7 @@
 	</typeAliases>
 
 	<plugins>
-		<plugin interceptor="com.gxws.tool.mybatis.plugin.MapperPlugin"></plugin>
+		<plugin interceptor="com.gxwsxx.tool.mybatis.plugin.MapperPlugin"></plugin>
 	</plugins>
 
 	<environments default="development">
