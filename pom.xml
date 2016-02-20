@@ -6,10 +6,9 @@
 	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>tool-link-properties</module>
 		<module>tool-web-tv</module>
 		<module>tool-mybatis</module>
-		<module>tool-exception</module>
+		<module>tool-properties</module>
 	</modules>
 
 	<description>tool kit for the java development team which names "Self Operation"</description>
@@ -48,6 +47,7 @@
 
 		<!-- zookeeper -->
 		<version.zookeeper>3.4.6</version.zookeeper>
+		<version.curator>3.0.0</version.curator>
 
 		<!-- test -->
 		<version.junit>4.12</version.junit>
@@ -60,6 +60,13 @@
 
 		<!-- validator -->
 		<version.hibernate.validator>5.2.2.Final</version.hibernate.validator>
+
+		<!-- json -->
+		<version.gson>2.5</version.gson>
+
+		<!-- httpclient -->
+		<version.httpclient>4.5.1</version.httpclient>
+
 	</properties>
 
 	<dependencyManagement>
@@ -123,7 +130,6 @@
 				<version>${version.springframework}</version>
 			</dependency>
 
-
 			<!-- logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -162,12 +168,19 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.curator</groupId>
+				<artifactId>curator-framework</artifactId>
+				<version>${version.curator}</version>
+			</dependency>
+
 
 			<!-- test -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit}</version>
+				<scope>test</scope>
 			</dependency>
 
 			<!-- mybatis -->
@@ -190,6 +203,20 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>${version.hibernate.validator}</version>
+			</dependency>
+
+			<!-- json -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${version.gson}</version>
+			</dependency>
+
+			<!-- httpclient -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${version.httpclient}</version>
 			</dependency>
 
 		</dependencies>
