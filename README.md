@@ -21,10 +21,3 @@
 添加的项目：tool-weixin。<br>
 
 
-添加rpc模块tool-rpc。<br>
-添加工具模块tool-utils。<br>
-去除tool-validator模块，相应的验证功能并入tool-rpc。<br>
-去除tool-logging大部分功能，相应的参数日志记录功能并入tool-rpc。<br>
-去除tool-test模块，还没有设计好测试的方式。<br>
-去除tool-common模块，将相应的功能并入tool-link-properties和tool-utils中。<br>
-添加exception模块，主要用于方便异常信息格式输出。<br>
