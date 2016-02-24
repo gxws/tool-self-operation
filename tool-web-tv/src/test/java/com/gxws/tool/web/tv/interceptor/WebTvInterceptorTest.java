@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.gxwsxx.tool.web.tv.data.WebTvUserParam;
+import com.gxwsxx.tool.tv.datamodel.TvParam;
 
 @WebAppConfiguration
 @ContextConfiguration(locations = { "/test-spring.xml" })
@@ -42,7 +42,7 @@ public class WebTvInterceptorTest {
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/testurl1?" + param))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTRIBUTE_NAME);
+		TvParam p = (TvParam) result.getRequest().getAttribute(TvParam.ATTRIBUTE_NAME);
 		Assert.assertEquals(p.getStb(), "123");
 		Assert.assertEquals(p.getIdc(), "213");
 		Assert.assertEquals(p.getArea(), "321");
@@ -92,7 +92,7 @@ public class WebTvInterceptorTest {
 				.get("/testurl1?device_id=123&user_id=213&area_code=321&stbType=0002").header("User-Agent", "abc"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTRIBUTE_NAME);
+		TvParam p = (TvParam) result.getRequest().getAttribute(TvParam.ATTRIBUTE_NAME);
 		Assert.assertEquals(p.getStb(), "123");
 		Assert.assertEquals(p.getIdc(), "213");
 		Assert.assertEquals(p.getArea(), "321");
@@ -106,7 +106,7 @@ public class WebTvInterceptorTest {
 				.get("/testurl1?device_id=123&user_id=213&area_code=321&device_type=0002").header("User-Agent", "abc"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTRIBUTE_NAME);
+		TvParam p = (TvParam) result.getRequest().getAttribute(TvParam.ATTRIBUTE_NAME);
 		Assert.assertEquals(p.getStb(), "123");
 		Assert.assertEquals(p.getIdc(), "213");
 		Assert.assertEquals(p.getArea(), "321");
@@ -122,7 +122,7 @@ public class WebTvInterceptorTest {
 								"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36"))
 				.andDo(MockMvcResultHandlers.print()).andReturn();
 		Assert.assertNotNull(result.getModelAndView().getViewName());
-		WebTvUserParam p = (WebTvUserParam) result.getRequest().getAttribute(WebTvUserParam.ATTRIBUTE_NAME);
+		TvParam p = (TvParam) result.getRequest().getAttribute(TvParam.ATTRIBUTE_NAME);
 		Assert.assertEquals(p.getStb(), "123");
 		Assert.assertEquals(p.getIdc(), "213");
 		Assert.assertEquals(p.getArea(), "321");

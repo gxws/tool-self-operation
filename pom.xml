@@ -6,7 +6,7 @@
 	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>tool-web-tv</module>
+		<module>tool-tv</module>
 		<module>tool-mybatis</module>
 		<module>tool-properties</module>
 		<module>tool-weixin</module>

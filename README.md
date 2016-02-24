@@ -17,7 +17,7 @@
 ### 3.0.0
 修改com.gxws为com.gxwsxx<br>
 去除的项目：tool-validator，tool-logging，tool-test，tool-common。<br>
-替代的项目：tool-properties代替tool-link-properties。<br>
+替代的项目：tool-properties代替tool-link-properties，tool-tv代替tool-web-tv<br>
 添加的项目：tool-weixin。<br>
 
 
