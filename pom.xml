@@ -8,7 +8,6 @@
 	<modules>
 		<module>tool-tv</module>
 		<module>tool-mybatis</module>
-		<module>tool-properties</module>
 		<module>tool-weixin</module>
 	</modules>
 
