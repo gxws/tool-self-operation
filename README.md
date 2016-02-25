@@ -19,5 +19,8 @@
 去除的项目：tool-validator，tool-logging，tool-test，tool-common，tool-link-properties。<br>
 替代的项目：tool-tv代替tool-web-tv<br>
 添加的项目：tool-weixin。<br>
+spring-framework版本号调整为4.2.4。<br>
+mybatis版本号调整为3.3.1。<br>
+mariadb-java-client版本号调整为1.3.5。<br>
 
 
