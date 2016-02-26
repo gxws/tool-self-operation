@@ -8,7 +8,6 @@
 	<modules>
 		<module>tool-tv</module>
 		<module>tool-mybatis</module>
-		<module>tool-weixin</module>
 	</modules>
 
 	<description>tool kit for the java development team which names "Self Operation"</description>
