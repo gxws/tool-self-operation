@@ -33,7 +33,7 @@ public class WeixinBo {
 
 
 	private String accessToken;
-
+	
 	private String appID;
 
 	private String appsecret;
@@ -69,7 +69,7 @@ public class WeixinBo {
 //			log.error(e.getMessage(), e);
 		}
 	}
-
+	
 	/**
 	 * 使用用户授权的code获取openid
 	 * 
