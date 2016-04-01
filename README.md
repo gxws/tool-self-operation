@@ -22,5 +22,7 @@
 spring-framework版本号调整为4.2.4。<br>
 mybatis版本号调整为3.3.1。<br>
 mariadb-java-client版本号调整为1.3.5。<br>
+jdk版本调整为1.8.<br>
+
 
 
