@@ -7,12 +7,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.gxws.tool.mybatis.test.mapper.TestTbMapper;
 import com.gxws.tool.mybatis.test.mapper.TestTbSubMapper;
@@ -49,7 +47,7 @@ public class SubMapperProviderTest {
 		session.close();
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testInsert() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		TestTb tb = new TestTb();
@@ -58,7 +56,7 @@ public class SubMapperProviderTest {
 		Assert.assertEquals(mapper.insert(tb), 1);
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testInsertNotNull() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		TestTb tb = new TestTb();
@@ -67,13 +65,13 @@ public class SubMapperProviderTest {
 		Assert.assertEquals(mapper.insertNotNull(tb), 1);
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testSelect() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		Assert.assertEquals(mapper.select("3").getName(), "name3");
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testUpdate() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		TestTb tb = new TestTb();
@@ -84,7 +82,7 @@ public class SubMapperProviderTest {
 		Assert.assertEquals(mapper.update(tb), 1);
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testUpdateNotNull() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		TestTb tb = new TestTb();
@@ -96,13 +94,13 @@ public class SubMapperProviderTest {
 		Assert.assertEquals(mapper.updateNotNull(tb), 1);
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testDelete() {
 		TestTbSubMapper mapper = session.getMapper(TestTbSubMapper.class);
 		Assert.assertEquals(mapper.delete("6"), 1);
 	}
 
-	@Test(groups = { "subMapper" }, dependsOnGroups = { "supMapper" })
+	@Test
 	public void testCount() {
 		TestTbMapper mapper = session.getMapper(TestTbMapper.class);
 		Assert.assertEquals(mapper.count(), 4);

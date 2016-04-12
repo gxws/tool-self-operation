@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- java对象序列化为json格式 -->
+	<bean id="jsonConverter"
+		class="org.springframework.http.converter.json.GsonHttpMessageConverter">
+		<property name="gson" ref="gson" />
+		<property name="supportedMediaTypes">
+			<list value-type="">
+				<bean class="org.springframework.http.MediaType">
+					<constructor-arg value="APPLICATION_JSON_UTF8" />
+				</bean>
+				<bean class="org.springframework.http.MediaType">
+					<constructor-arg value="APPLICATION_JSON" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="gson" class="com.gxwsxx.restful.gson.RestfulGsonFactoryBean">
+		<property name="hierarchyTypeAdapter">
+			<map key-type="java.lang.Class" value-type="java.lang.Object">
+				<entry key="java.lang.Enum">
+					<bean class="com.gxwsxx.restful.gson.EnumTypeAdapter" />
+				</entry>
+				<entry key="java.util.Date">
+					<bean class="com.gxwsxx.restful.gson.DateTypeAdapter" />
+				</entry>
+			</map>
+		</property>
+		<property name="exclusionStrategies">
+			<array value-type="com.google.gson.ExclusionStrategy">
+				<bean class="com.gxwsxx.restful.gson.ExceptionGsonExclusionStrategy" />
+			</array>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<import resource="spring-restful-json.xml" />
+
+	<bean id="httpClient" class="com.gxwsxx.restful.consumer.HttpClientFactoryBean">
+		<!-- httpClient重试策略 -->
+		<property name="httpRequestRetryHandler">
+			<bean class="org.apache.http.impl.client.DefaultHttpRequestRetryHandler">
+				<constructor-arg value="0" />
+				<constructor-arg value="false" />
+			</bean>
+		</property>
+		<!-- http header设置 -->
+		<!-- <property name="defaultHeaders"> <list> <bean class="org.apache.http.message.BasicHeader"> 
+			<constructor-arg value="Accept" /> <constructor-arg value="application/json;charset=UTF-8" 
+			/> </bean> <bean class="org.apache.http.message.BasicHeader"> <constructor-arg 
+			value="Accept-Charset" /> <constructor-arg value="UTF-8" /> </bean> <bean 
+			class="org.apache.http.message.BasicHeader"> <constructor-arg value="Accept-Encoding" 
+			/> <constructor-arg value="gzip;q=1.0" /> </bean> <bean class="org.apache.http.message.BasicHeader"> 
+			<constructor-arg value="Accept-Language" /> <constructor-arg value="zh-CN" 
+			/> </bean> </list> </property> -->
+	</bean>
+
+	<bean id="httpRequestFactory"
+		class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+		<constructor-arg ref="httpClient" />
+		<property name="connectTimeout" value="5000" />
+		<property name="readTimeout" value="10000" />
+	</bean>
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<constructor-arg ref="httpRequestFactory" />
+		<property name="errorHandler">
+			<bean class="org.springframework.web.client.DefaultResponseErrorHandler" />
+		</property>
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+
+</beans>
