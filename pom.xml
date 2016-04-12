@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gxwsxx</groupId>
     <artifactId>tool-self-operation</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>tool-tv</module>
@@ -20,13 +20,10 @@
 
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
-            <url>http://nexus.gxwsxx.com/nexus/content/repositories/releases/</url>
+            <id>tool-self-operation-repo</id>
+            <name>tool-self-operation-repo</name>
+            <url>file:./repository</url>
         </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://nexus.gxwsxx.com/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <properties>
@@ -262,4 +259,5 @@
 
         </plugins>
     </build>
+
 </project>
