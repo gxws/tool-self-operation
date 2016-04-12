@@ -2,7 +2,7 @@
 
 自运营项目的工具集合
 
-## 1.版本变更说明
+## 1. 版本变更说明
 
 ### 2.0.0
 去除dubbo的maven依赖。<br>
@@ -24,6 +24,15 @@ mybatis版本号调整为3.3.1。<br>
 mariadb-java-client版本号调整为1.3.5。<br>
 jdk版本调整为1.8.<br>
 
-## 2.引用方法
+## 2. 引用方法
+在项目的pom.xml中添加项目在github的repository.<br>
+```xml
+<repositories>
+    <repository>
+        <id>tool-self-operation-repo</id>
+        <url>https://raw.githubusercontent.com/gxws/tool-self-operation/"版本号"/repository/</url>
+    </repository>
+</repositories>
+```    
 
 
