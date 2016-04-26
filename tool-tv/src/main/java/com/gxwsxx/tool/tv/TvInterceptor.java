@@ -17,7 +17,7 @@ public class TvInterceptor implements HandlerInterceptor {
 
     private TvHandler tvHandler = new TvHandler();
 
-    private static final String TV_ATTR_NAME = "tv";
+    private final String TV_ATTR_NAME = "tv";
 
     private String tvAttrName;
 
@@ -59,6 +59,6 @@ public class TvInterceptor implements HandlerInterceptor {
     }
 
     public String getTvAttrName() {
-        return tvAttrName != null ? tvAttrName : TV_ATTR_NAME;
+        return this.tvAttrName != null ? this.tvAttrName : this.TV_ATTR_NAME;
     }
 }
