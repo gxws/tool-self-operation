@@ -57,4 +57,8 @@ public class TvInterceptor implements HandlerInterceptor {
     public void setTvAttrName(String tvAttrName) {
         this.tvAttrName = tvAttrName;
     }
+
+    public String getTvAttrName() {
+        return tvAttrName != null ? tvAttrName : TV_ATTR_NAME;
+    }
 }
