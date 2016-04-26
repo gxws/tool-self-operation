@@ -24,6 +24,10 @@ mybatis版本号调整为3.3.1。<br>
 mariadb-java-client版本号调整为1.3.5。<br>
 jdk版本调整为1.8.<br>
 
+### 3.1.0
+模块和类重命名.<br>
+使用java.time模块处理时间生成.<br>
+
 ## 2. 引用方法
 在项目的pom.xml中添加项目在github的repository.<br>
 ```xml
